@@ -1,0 +1,8 @@
+.vs
+Logs
+obj
+Temp
+.vsconfig
+*.log
+UserSettings/Layouts
+Assets/Plugins/ByteGame
