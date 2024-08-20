@@ -11,12 +11,24 @@ namespace LearnCSharp
 
         public void RunThis() {
 
-
             Console.WriteLine("MainTest.RunThis!");
 
 
 
+            MyCodeChild.funcLgy();
+
+
+
         }
+
+
+
+
+
+    }
+
+
+    public class MyCode {
 
 
         public static void funcLgy()
@@ -29,13 +41,9 @@ namespace LearnCSharp
 
             Console.WriteLine($"Hello, World! in 2024-7-3, in MyCode.funcLgy, modelItem == null:{modelItem == null}");
 
-
             Console.WriteLine($"Hello, World! in 2024-7-3, in MyCode.funcLgy, isBoolRes:{modelItem == null}");
 
         }
-
-
-
 
 
         public bool isBoolRes()
@@ -63,8 +71,7 @@ namespace LearnCSharp
 
 
 
-
-    public class MyCodeChild : MainTest
+    public class MyCodeChild : MyCode
     {
 
 
