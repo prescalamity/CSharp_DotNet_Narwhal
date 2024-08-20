@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearnCSharp", "LearnCSharp\LearnCSharp.csproj", "{7B10109E-D765-48EC-87E1-A80E62579A05}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSSharpTools", "CSSharpTools\CSSharpTools.csproj", "{B301FCB9-1429-40BC-A8CC-5E7ED313E096}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7B10109E-D765-48EC-87E1-A80E62579A05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B10109E-D765-48EC-87E1-A80E62579A05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B10109E-D765-48EC-87E1-A80E62579A05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B301FCB9-1429-40BC-A8CC-5E7ED313E096}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B301FCB9-1429-40BC-A8CC-5E7ED313E096}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B301FCB9-1429-40BC-A8CC-5E7ED313E096}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B301FCB9-1429-40BC-A8CC-5E7ED313E096}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
