@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 
 namespace CSSharpTools
 {
@@ -6,9 +6,17 @@ namespace CSSharpTools
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("CSharp_DotNet_Narwhal.CSSharpTool.Program.Main, Hello, World!");
+
             //new Program().RunThis();
             //new Sortings().RunThis(); 
-            new Test().RunThis();
+            //new Test().RunThis();
+
+            //LogModule.Instance.RunThis();
+            LogModule.PersonDebug("I am testing PersonDebug log");
+            LogModule.Warning("I am testing Warning log");
+            LogModule.Error("I am testing error log");
+            LogModule.LogPath = "";
         }
 
         
