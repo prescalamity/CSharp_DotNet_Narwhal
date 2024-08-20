@@ -18,8 +18,13 @@ namespace LearnCSharp
             MyCodeChild.funcLgy();
 
 
+			// 测试命名空间继承关系
+			//TestExtensionMethods testExtensionMethods = new TestExtensionMethods();
+			//string das = testExtensionMethods.GetName();
+			//testExtensionMethods.RunThis();
+			//Console.WriteLine(das);
 
-        }
+		}
 
 
 
@@ -39,9 +44,7 @@ namespace LearnCSharp
 
             object modelItem = null;
 
-            Console.WriteLine($"Hello, World! in 2024-7-3, in MyCode.funcLgy, modelItem == null:{modelItem == null}");
-
-            Console.WriteLine($"Hello, World! in 2024-7-3, in MyCode.funcLgy, isBoolRes:{modelItem == null}");
+            Console.WriteLine($"Hello, World! in 2024-7-3, in MyCode.funcLgy, modelItem =? null:{modelItem == null}");
 
         }
 
