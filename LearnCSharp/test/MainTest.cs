@@ -33,9 +33,9 @@ namespace LearnCSharp
 
         public static void funcLgy()
         {
-            Console.WriteLine($"Hello, World! in 2024-7-3, in MyCode.funcLgy, {new System.Diagnostics.StackTrace().ToString()}");
-
             Console.WriteLine($"Hello, World! in 2024-7-3, in MyCode.funcLgy, {DateTime.Now.ToString("yyyy/MM/dd_HH:mm:ss_fff")}");
+
+            Console.WriteLine($"Hello, World! in 2024-7-3, in MyCode.funcLgy, \n{new System.Diagnostics.StackTrace().ToString()}");
 
             object modelItem = null;
 
