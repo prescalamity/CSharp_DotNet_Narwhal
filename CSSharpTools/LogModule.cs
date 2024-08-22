@@ -147,17 +147,17 @@ namespace CSSharpTools
                 if(logCount == (_LogMaxCount - 1))
                 {
                     // 输出已超过最大的日志行数
-                    PrintLog($"Warning: logs over {_LogMaxCount}, and no longer print after logs.", logGrade);
+                    PrintLog($"Warning: logs over {_LogMaxCount}, and no longer print after logs.");
                 }
 
                 return;
             }
 
-            PrintLog( content, logGrade);
+            PrintLog(content);
 
         }
 
-        private void PrintLog(string content, int logGrade)
+        private void PrintLog(string content)
         {
 
             // 需要输出到控制台，且包含指定日志
