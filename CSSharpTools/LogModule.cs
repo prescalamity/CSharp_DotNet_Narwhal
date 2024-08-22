@@ -25,7 +25,7 @@ namespace CSSharpTools
         }
 
         /// <summary>
-        /// 初衷是在查找某个 bug 的时候使用
+        /// 除 特定日志外的 其它信息日志
         /// </summary>
         public static void Log(string content)
         {
@@ -243,7 +243,7 @@ namespace CSSharpTools
         public const int PersonDebug = 4;
 
         /// <summary>
-        /// 除 数据 和 网络外的 其它信息日志
+        /// 除 特定日志外的 其它信息日志
         /// </summary>
         public const int Log = 8;
 
