@@ -1,3 +1,5 @@
+
+
 /**
  * 
  * 日志模块，
@@ -21,31 +23,31 @@ namespace CSSharpTools
         public static void PersonDebug(string content)
         {
 
-            Instance.PrintLog(content, LogLevel.PersonDebug);
+            Instance.PrintLog(content, LogController.PersonDebug);
         }
 
 
         public static void NetworkOrDataTransmit(string content)
         {
-            Instance.PrintLog(content, LogLevel.NetworkOrDataTransmit);
+            Instance.PrintLog(content, LogController.NetworkOrDataTransmit);
 
         }
 
         public static void Warning(string content)
         {
-            Instance.PrintLog(content, LogLevel.Warning);
+            Instance.PrintLog(content, LogController.Warning);
 
         }
 
         public static void ProgramImportantNode(string content)
         {
-            Instance.PrintLog(content, LogLevel.ProgramImportantNode);
+            Instance.PrintLog(content, LogController.ProgramImportantNode);
 
         }
 
         public static void Error(string content)
         {
-            Instance.PrintLog(content, LogLevel.Error);
+            Instance.PrintLog(content, LogController.Error);
 
         }
 
@@ -59,14 +61,14 @@ namespace CSSharpTools
         }
 
 
-        private static int _NeedOutputLogGrade = LogLevel.Error + LogLevel.ProgramImportantNode;
+        private static int _NeedOutputLogs = LogController.OutputToConsole + LogController.Error + LogController.ProgramImportantNode;
         /// <summary>
-        /// 指定 LogLevel中 哪些等级的日志可以输出，
+        /// 指定 LogController中 哪些等级的日志可以输出，
         /// 默认是错误和程序流程节点日志
         /// </summary>
-        public static int NeedOutputLogGrade
+        public static int NeedOutputLogs
         {
-            set { _NeedOutputLogGrade = value; }
+            set { _NeedOutputLogs = value; }
         }
 
         #endregion
@@ -103,15 +105,15 @@ namespace CSSharpTools
         {
             Console.WriteLine($"LogModule.RunThis, m_Path={_LogPath}");
 
-            //_NeedOutputLogGrade += LogLevel.PersonDebug;
+            //_NeedOutputLogs += LogController.PersonDebug;
 
-            //if ( (_NeedOutputLogGrade & LogLevel.PersonDebug) == 0)
+            //if ( (_NeedOutputLogs & LogController.PersonDebug) == 0)
             //{
-            //    Console.WriteLine($"LogModule.RunThis, {_NeedOutputLogGrade} not contain {LogLevel.PersonDebug}");
+            //    Console.WriteLine($"LogModule.RunThis, {_NeedOutputLogs} not contain {LogController.PersonDebug}");
             //}
             //else
             //{
-            //    Console.WriteLine($"LogModule.RunThis, {_NeedOutputLogGrade} contain {LogLevel.PersonDebug}");
+            //    Console.WriteLine($"LogModule.RunThis, {_NeedOutputLogs} contain {LogController.PersonDebug}");
             //}
 
         }
@@ -119,10 +121,16 @@ namespace CSSharpTools
 
         private void PrintLog(string content, int logGrade)
         {
-            if ((_NeedOutputLogGrade & logGrade) != 0)
+            // 需要输出到控制台，且包含指定日志
+            if (((_NeedOutputLogs & LogController.OutputToConsole) != 0) && ((_NeedOutputLogs & logGrade) != 0))
             {
                 Console.WriteLine(content);
+                //Debug.Log(content);
+            }
 
+            // 需要输出到文件，且包含指定日志
+            if (((_NeedOutputLogs & LogController.OutputToFile) != 0) && ((_NeedOutputLogs & logGrade) != 0))
+            {
                 // 输出到外部文件中
 
             }
@@ -142,7 +150,7 @@ namespace CSSharpTools
     ///// 1000 0000 = 128  = 2^7
     ///// 0000 0001 = 1    = 2^0
     ///// </summary>
-    //public enum LogLevel
+    //public enum LogController
     //{
 
     //    First = 1,
@@ -170,19 +178,32 @@ namespace CSSharpTools
     /// 1000 0000 = 128  = 2^7
     /// 0000 0001 = 1    = 2^0
     /// </summary>
-    public class LogLevel
+    public class LogController
     {
+        /// <summary>
+        /// 关闭日志打印
+        /// </summary>
+        public const int Close = 0;
 
-        public const int First = 1; 
+        /// <summary>
+        /// 是否输出到控制台
+        /// </summary>
+        public const int OutputToConsole = 1;
 
-        public const int Second = 2;
-
-        public const int Third = 4;
+        /// <summary>
+        /// 是否输出到文件
+        /// </summary>
+        public const int OutputToFile = 2;
 
         /// <summary>
         /// 初衷是在查找某个 bug 的时候使用
         /// </summary>
-        public const int PersonDebug = 8;
+        public const int PersonDebug = 4;
+
+        /// <summary>
+        /// 除 数据 和 网络外的 其它信息日志
+        /// </summary>
+        public const int Log = 8;
 
         public const int NetworkOrDataTransmit = 16;
 
@@ -191,6 +212,7 @@ namespace CSSharpTools
         public const int ProgramImportantNode = 64;
 
         public const int Error = 128;
+
 
     }
 
