@@ -56,37 +56,40 @@ namespace CSSharpTools
 
         }
 
-        private static string _LogPath = string.Empty;
+        #endregion
+
+
+        private string _LogPath = string.Empty;
         /// <summary>
         /// 指定日志输出到哪个文件
         /// </summary>
-        public static string LogPath
+        public string LogPath
         {
-            set { _LogPath = value; }
+            get { return _LogPath; }
+            private set { _LogPath = value; }
         }
 
 
-        private static int _NeedOutputLogs = LogController.OutputToConsole + LogController.Error + LogController.ProgramImportantNode;
+        private int _NeedOutputLogs = LogController.OutputToConsole + LogController.Error + LogController.ProgramImportantNode;
         /// <summary>
         /// 指定 LogController中 哪些等级的日志可以输出，
         /// 默认是错误和程序流程节点日志
         /// </summary>
-        public static int NeedOutputLogs
+        public int NeedOutputLogs
         {
-            set { _NeedOutputLogs = value; }
+            get { return _NeedOutputLogs; }
+            private set { _NeedOutputLogs = value; }
         }
 
-        private static int _LogMaxCount = int.MaxValue;
+        private int _LogMaxCount = int.MaxValue;
         /// <summary>
         /// 最大的日志行数
         /// </summary>
-        public static int LogMaxCount
+        public int LogMaxCount
         {
-            set { _LogMaxCount = value; }
+            get { return _LogMaxCount; }
+            private set { _LogMaxCount = value; }
         }
-
-        #endregion
-
 
 
         private int logCount = 0;
@@ -96,7 +99,7 @@ namespace CSSharpTools
         /// </summary>
         private LogModule()
         {
-            RunThis();
+            //RunThis();
         }
 
 
@@ -118,9 +121,9 @@ namespace CSSharpTools
         }
 
 
-        private void RunThis()
+        public void Init(int needOutputLogs, string logPath="")
         {
-            Console.WriteLine($"LogModule.RunThis, m_Path={_LogPath}");
+            Console.WriteLine($"LogModule.Init, logPath={logPath}, needOutputLogs={needOutputLogs}");
 
             //_NeedOutputLogs += LogController.PersonDebug;
 
@@ -133,6 +136,8 @@ namespace CSSharpTools
             //    Console.WriteLine($"LogModule.RunThis, {_NeedOutputLogs} contain {LogController.PersonDebug}");
             //}
 
+            LogPath = logPath;
+            NeedOutputLogs = needOutputLogs;
         }
 
 

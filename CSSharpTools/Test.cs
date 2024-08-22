@@ -6,11 +6,11 @@ namespace CSSharpTools
 {
     class Test
     {
-
+        int MaxCount = 30000;
 
         public void RunThis()
         {
-            Console.WriteLine("Start here!");
+            Console.WriteLine("Test.RunThis!");
             //Console.WriteLine(Factorial(3));
 
             //Stack<int> sta = new Stack<int>();
@@ -24,9 +24,32 @@ namespace CSSharpTools
             //foreach (int i in sta) Console.WriteLine(i);
 
 
+            //new Sortings().RunThis(); 
 
-            Sub1 sub = new Sub1();
-            sub.Say();
+
+            //LogModule.Instance.Init(LogController.OutputToConsole + LogController.Log);
+
+
+            long start = Timer.DateTimeToLongTimeStamp();
+
+            long flag1 = DateTime.UtcNow.Ticks;
+
+            int couter = 0;
+
+            for (int i = 0; i < MaxCount; i++) {
+                //couter++;
+                //LogModule.Log($"Test.RunThis, i={i}");
+            }
+
+
+            long end = Timer.DateTimeToLongTimeStamp();
+
+            long flag2 = DateTime.UtcNow.Ticks;
+
+            Console.WriteLine($"Start here, time totle: {end-start} ms, \n flag1={flag1}, \n flag2={flag2}");
+
+            //Sub1 sub = new Sub1();
+            //sub.Say();
         }
 
         /// <summary>
