@@ -1,5 +1,3 @@
-
-
 /**
  * 
  * 日志模块，
@@ -23,31 +21,38 @@ namespace CSSharpTools
         public static void PersonDebug(string content)
         {
 
-            Instance.PrintLog(content, LogController.PersonDebug);
+            Instance.ControllerPrintLog(content, LogController.PersonDebug);
         }
 
+        /// <summary>
+        /// 初衷是在查找某个 bug 的时候使用
+        /// </summary>
+        public static void Log(string content)
+        {
+            Instance.ControllerPrintLog(content, LogController.Log);
+        }
 
         public static void NetworkOrDataTransmit(string content)
         {
-            Instance.PrintLog(content, LogController.NetworkOrDataTransmit);
+            Instance.ControllerPrintLog(content, LogController.NetworkOrDataTransmit);
 
         }
 
         public static void Warning(string content)
         {
-            Instance.PrintLog(content, LogController.Warning);
+            Instance.ControllerPrintLog(content, LogController.Warning);
 
         }
 
         public static void ProgramImportantNode(string content)
         {
-            Instance.PrintLog(content, LogController.ProgramImportantNode);
+            Instance.ControllerPrintLog(content, LogController.ProgramImportantNode);
 
         }
 
         public static void Error(string content)
         {
-            Instance.PrintLog(content, LogController.Error);
+            Instance.ControllerPrintLog(content, LogController.Error);
 
         }
 
@@ -71,8 +76,20 @@ namespace CSSharpTools
             set { _NeedOutputLogs = value; }
         }
 
+        private static int _LogMaxCount = int.MaxValue;
+        /// <summary>
+        /// 最大的日志行数
+        /// </summary>
+        public static int LogMaxCount
+        {
+            set { _LogMaxCount = value; }
+        }
+
         #endregion
 
+
+
+        private int logCount = 0;
 
         /// <summary>
         /// 外部不能 new 本类
@@ -119,25 +136,50 @@ namespace CSSharpTools
         }
 
 
+        private void ControllerPrintLog(string content, int logGrade)
+        {
+            if ( _NeedOutputLogs == 0) return;
+
+            if ((_NeedOutputLogs & logGrade) == 0) return;
+
+            if (logCount >= (_LogMaxCount-1))
+            {
+                if(logCount == (_LogMaxCount - 1))
+                {
+                    // 输出已超过最大的日志行数
+                    PrintLog($"Warning: logs over {_LogMaxCount}, and no longer print after logs.", logGrade);
+                }
+
+                return;
+            }
+
+            PrintLog( content, logGrade);
+
+        }
+
         private void PrintLog(string content, int logGrade)
         {
+
             // 需要输出到控制台，且包含指定日志
-            if (((_NeedOutputLogs & LogController.OutputToConsole) != 0) && ((_NeedOutputLogs & logGrade) != 0))
+            if ((_NeedOutputLogs & LogController.OutputToConsole) != 0)
             {
                 Console.WriteLine(content);
                 //Debug.Log(content);
             }
 
             // 需要输出到文件，且包含指定日志
-            if (((_NeedOutputLogs & LogController.OutputToFile) != 0) && ((_NeedOutputLogs & logGrade) != 0))
+            if ((_NeedOutputLogs & LogController.OutputToFile) != 0)
             {
                 // 输出到外部文件中
 
             }
 
+            if (((_NeedOutputLogs & LogController.OutputToConsole) != 0) || ((_NeedOutputLogs & LogController.OutputToFile) != 0))
+            {
+                logCount++;
+            }
+
         }
-
-
 
 
     }
