@@ -122,7 +122,7 @@ namespace CSSharpTools
 
         public void Init(int needOutputLogs, string logPath="")
         {
-            Console.WriteLine($"LogModule.Init, logPath={logPath}, needOutputLogs={needOutputLogs}");
+            ///Console.WriteLine($"LogModule.Init, logPath={logPath}, needOutputLogs={needOutputLogs}");
 
             //_NeedOutputLogs += LogController.PersonDebug;
 

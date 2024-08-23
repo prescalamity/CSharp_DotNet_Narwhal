@@ -33,12 +33,14 @@ namespace CSSharpTools
             //long start = Timer.DateTimeToLongTimeStamp();
 
             int couter = 0;
+			string testStr = "";
 
-            long flag1 = DateTime.UtcNow.Ticks;
+			long flag1 = DateTime.UtcNow.Ticks;
             for (int i = 0; i < MaxCount; i++) {
-                couter++;
-                //if (couter == -1) { couter++; }
-            }
+                //couter++;
+				//if (couter == -1) { couter++; }
+				testStr = $"Test.RunThis, i={i}";
+			}
 
             long flag2 = DateTime.UtcNow.Ticks;
 
@@ -75,7 +77,7 @@ namespace CSSharpTools
 
             //Console.WriteLine($"Start here, time totle: -- ms, \n flag1={flag1}, \n flag2={flag2}, ns");
 
-            Console.WriteLine($"Test.RunThis, MaxCount: {MaxCount}, flag1={flag1}, + = {flag2-flag1}00 ns, CallFunction = {flag2_1 - flag2}00 ns, CallFunctionInit = {flag2_5- flag2_1}00 ns, " +
+            Console.WriteLine($"Test.RunThis, testStr={testStr}, MaxCount: {MaxCount}, flag1={flag1}, + = {flag2-flag1}00 ns, CallFunction = {flag2_1 - flag2}00 ns, CallFunctionInit = {flag2_5- flag2_1}00 ns, " +
                 $"CallFunctionBool = {flag2_6-flag2_5}00 ns, CallFunctionInit = {flag3 - flag2_6}00 ns, CallFunctionPrint = {flag4-flag3}00 ns.");
 
             //Sub1 sub = new Sub1();
