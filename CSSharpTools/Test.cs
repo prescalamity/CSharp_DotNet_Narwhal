@@ -27,26 +27,56 @@ namespace CSSharpTools
             //new Sortings().RunThis(); 
 
 
-            //LogModule.Instance.Init(LogController.OutputToConsole + LogController.Log);
 
 
-            long start = Timer.DateTimeToLongTimeStamp();
 
-            long flag1 = DateTime.UtcNow.Ticks;
+            //long start = Timer.DateTimeToLongTimeStamp();
 
             int couter = 0;
 
+            long flag1 = DateTime.UtcNow.Ticks;
             for (int i = 0; i < MaxCount; i++) {
-                //couter++;
-                //LogModule.Log($"Test.RunThis, i={i}");
+                couter++;
+                //if (couter == -1) { couter++; }
             }
-
-
-            long end = Timer.DateTimeToLongTimeStamp();
 
             long flag2 = DateTime.UtcNow.Ticks;
 
-            Console.WriteLine($"Start here, time totle: {end-start} ms, \n flag1={flag1}, \n flag2={flag2}");
+            for (int i = 0; i < MaxCount; i++)
+            {
+                Sub1.ThisStaticFunc("");
+            }
+            long flag2_1 = DateTime.UtcNow.Ticks;
+            
+
+            LogModule.Instance.Init(LogController.Close);
+
+
+            long flag2_5 = DateTime.UtcNow.Ticks;
+            for (int i = 0; i < MaxCount; i++)
+            {
+                LogModule.Log($"Test.RunThis, i={i}");
+            }
+            long flag2_6 = DateTime.UtcNow.Ticks;
+
+
+            LogModule.Instance.Init(LogController.OutputToConsole + LogController.Log);
+
+
+            long flag3 = DateTime.UtcNow.Ticks;
+            for (int i = 0; i < MaxCount; i++)
+            {
+                LogModule.Log($"Test.RunThis, i={i}");
+            }
+            long flag4 = DateTime.UtcNow.Ticks;
+
+
+            //long end = Timer.DateTimeToLongTimeStamp();
+
+            //Console.WriteLine($"Start here, time totle: -- ms, \n flag1={flag1}, \n flag2={flag2}, ns");
+
+            Console.WriteLine($"Test.RunThis, MaxCount: {MaxCount},  + = {flag2-flag1}00 ns, CallFunction = {flag2_1 - flag2}00 ns, CallFunctionInit = {flag2_5- flag2_1}00 ns, " +
+                $"CallFunctionBool = {flag2_6-flag2_5}00 ns, CallFunctionInit = {flag3 - flag2_6}00 ns, CallFunctionPrint = {flag4-flag3}00 ns.");
 
             //Sub1 sub = new Sub1();
             //sub.Say();
@@ -100,6 +130,12 @@ namespace CSSharpTools
 
     public class Base
     {
+
+        public static void ThisStaticFunc(string value)
+        {
+
+        }
+
         public Base()
         {
             Say();

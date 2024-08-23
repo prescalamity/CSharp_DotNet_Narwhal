@@ -20,7 +20,6 @@ namespace CSSharpTools
         /// </summary>
         public static void PersonDebug(string content)
         {
-
             Instance.ControllerPrintLog(content, LogController.PersonDebug);
         }
 
