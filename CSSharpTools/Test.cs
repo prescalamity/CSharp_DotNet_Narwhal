@@ -75,7 +75,7 @@ namespace CSSharpTools
 
             //Console.WriteLine($"Start here, time totle: -- ms, \n flag1={flag1}, \n flag2={flag2}, ns");
 
-            Console.WriteLine($"Test.RunThis, MaxCount: {MaxCount},  + = {flag2-flag1}00 ns, CallFunction = {flag2_1 - flag2}00 ns, CallFunctionInit = {flag2_5- flag2_1}00 ns, " +
+            Console.WriteLine($"Test.RunThis, MaxCount: {MaxCount}, flag1={flag1}, + = {flag2-flag1}00 ns, CallFunction = {flag2_1 - flag2}00 ns, CallFunctionInit = {flag2_5- flag2_1}00 ns, " +
                 $"CallFunctionBool = {flag2_6-flag2_5}00 ns, CallFunctionInit = {flag3 - flag2_6}00 ns, CallFunctionPrint = {flag4-flag3}00 ns.");
 
             //Sub1 sub = new Sub1();
