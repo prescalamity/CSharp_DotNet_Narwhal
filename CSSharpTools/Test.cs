@@ -39,13 +39,13 @@ namespace CSSharpTools
 
 			long flag1 = DateTime.UtcNow.Ticks;
             for (int i = 0; i < MaxCount; i++) {
-                //couter++;
+				//couter++;
 				//if (couter == -1) { couter++; }
-				testStr = "Test.RunThis, i=-1";
-    //            sb.Clear();
-    //            sb.Append("Test.RunThis, i=-1");
-    //            sb.Append(i.ToString());
-				//testStr = sb.ToString();
+				//testStr = "Test.RunThis, i=-1";
+				sb.Clear();
+				sb.Append("Test.RunThis, i=");
+				sb.Append(i.ToString());
+				testStr = sb.ToString();
 				//testStr = string.Format("Test.RunThis, i={0}", i);
 			}
 
@@ -64,19 +64,19 @@ namespace CSSharpTools
             long flag2_5 = DateTime.UtcNow.Ticks;
             for (int i = 0; i < MaxCount; i++)
             {
-                LogModule.Log($"Test.RunThis, i=-1");
+                LogModule.Info($"Test.RunThis, i=-1");
             }
             long flag2_6 = DateTime.UtcNow.Ticks;
 
 
-            LogModule.Instance.Init(LogController.OutputToConsole + LogController.Log);
+            LogModule.Instance.Init(LogController.OutputToConsole + LogController.Info);
 
 
             long flag3 = DateTime.UtcNow.Ticks;
             for (int i = 0; i < MaxCount; i++)
             {
-                //LogModule.Log($"Test.RunThis, i={i}");
-                LogModule.Log($"Test.RunThis, i=-1");
+                //LogModule.Info($"Test.RunThis, i={i}");
+                LogModule.Info($"Test.RunThis, i=-1");
             }
             long flag4 = DateTime.UtcNow.Ticks;
 

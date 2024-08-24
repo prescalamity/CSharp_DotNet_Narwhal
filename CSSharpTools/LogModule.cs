@@ -26,9 +26,9 @@ namespace CSSharpTools
         /// <summary>
         /// 除 特定日志外的 其它信息日志
         /// </summary>
-        public static void Log(string content)
+        public static void Info(string content)
         {
-            Instance.ControllerPrintLog(content, LogController.Log);
+            Instance.ControllerPrintLog(content, LogController.Info);
         }
 
         public static void NetworkOrDataTransmit(string content)
@@ -140,11 +140,11 @@ namespace CSSharpTools
         }
 
 
-        private void ControllerPrintLog(string content, int logGrade)
+        private void ControllerPrintLog(string content, int logLevel)
         {
             if ( _NeedOutputLogs == 0) return;
 
-            if ((_NeedOutputLogs & logGrade) == 0) return;
+            if ((_NeedOutputLogs & logLevel) == 0) return;
 
             if (logCount >= (_LogMaxCount-1))
             {
@@ -168,7 +168,7 @@ namespace CSSharpTools
             if ((_NeedOutputLogs & LogController.OutputToConsole) != 0)
             {
                 Console.WriteLine(content);
-                //Debug.Log(content);
+                //Debug.Info(content);
             }
 
             // 需要输出到文件，且包含指定日志
@@ -249,7 +249,7 @@ namespace CSSharpTools
         /// <summary>
         /// 除 特定日志外的 其它信息日志
         /// </summary>
-        public const int Log = 8;
+        public const int Info = 8;
 
         public const int NetworkOrDataTransmit = 16;
 
