@@ -35,11 +35,18 @@ namespace CSSharpTools
             int couter = 0;
 			string testStr = "";
 
+            StringBuilder sb = new StringBuilder();
+
 			long flag1 = DateTime.UtcNow.Ticks;
             for (int i = 0; i < MaxCount; i++) {
                 //couter++;
 				//if (couter == -1) { couter++; }
-				testStr = $"Test.RunThis, i={i}";
+				testStr = "Test.RunThis, i=-1";
+    //            sb.Clear();
+    //            sb.Append("Test.RunThis, i=-1");
+    //            sb.Append(i.ToString());
+				//testStr = sb.ToString();
+				//testStr = string.Format("Test.RunThis, i={0}", i);
 			}
 
             long flag2 = DateTime.UtcNow.Ticks;
@@ -57,7 +64,7 @@ namespace CSSharpTools
             long flag2_5 = DateTime.UtcNow.Ticks;
             for (int i = 0; i < MaxCount; i++)
             {
-                LogModule.Log($"Test.RunThis, i={i}");
+                LogModule.Log($"Test.RunThis, i=-1");
             }
             long flag2_6 = DateTime.UtcNow.Ticks;
 
@@ -68,7 +75,8 @@ namespace CSSharpTools
             long flag3 = DateTime.UtcNow.Ticks;
             for (int i = 0; i < MaxCount; i++)
             {
-                LogModule.Log($"Test.RunThis, i={i}");
+                //LogModule.Log($"Test.RunThis, i={i}");
+                LogModule.Log($"Test.RunThis, i=-1");
             }
             long flag4 = DateTime.UtcNow.Ticks;
 
