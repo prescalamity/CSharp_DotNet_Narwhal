@@ -24,16 +24,20 @@ namespace CSSharpTools
         }
 
         /// <summary>
-        /// 除 特定日志外的 其它信息日志
+        /// 普通的不带字符串连接的日志，resStr = "str1";
         /// </summary>
-        public static void Info(string content)
+        public static void LogWihtoutStrConnect(string content)
         {
-            Instance.ControllerPrintLog(content, LogController.Info);
+            Instance.ControllerPrintLog(content, LogController.LogWihtoutStrConnect);
         }
 
-        public static void NetworkOrDataTransmit(string content)
+        /// <summary>
+        /// 普通的带有字符串连接的日志，例如：resStr = "str1" + data;
+        /// </summary>
+        /// <param name="content"></param>
+        public static void LogWithStrConnect(string content)
         {
-            Instance.ControllerPrintLog(content, LogController.NetworkOrDataTransmit);
+            Instance.ControllerPrintLog(content, LogController.LogWithStrConnect);
 
         }
 
@@ -247,11 +251,14 @@ namespace CSSharpTools
         public const int PersonDebug = 4;
 
         /// <summary>
-        /// 除 特定日志外的 其它信息日志
+        /// 普通的不带字符串连接的日志
         /// </summary>
-        public const int Info = 8;
+        public const int LogWihtoutStrConnect = 8;
 
-        public const int NetworkOrDataTransmit = 16;
+        /// <summary>
+        /// 普通的带有字符串连接的日志
+        /// </summary>
+        public const int LogWithStrConnect = 16;
 
         public const int Warning = 32;
 
