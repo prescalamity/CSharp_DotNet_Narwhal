@@ -16,10 +16,12 @@ namespace CSSharpTools
         #region 模块对外接口
 
         /// <summary>
-        /// 初衷是在查找某个 bug 的时候使用
+        /// 包含字符串拼接，不应该在发布版中 运行，
+        /// 初衷是在查找某个 bug 的时候使用，
         /// </summary>
-        public static void PersonDebug(string content)
+        public static void PersonDebug(string content, string tag = "PersonDebug, ")
         {
+            content = tag + content;
             Instance.ControllerPrintLog(content, LogController.PersonDebug);
         }
 
