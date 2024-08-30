@@ -84,9 +84,12 @@ namespace CSSharpTools
 		public static object lockLogQueue = new object();
 
 
-        private string _LogPath = string.Empty;
+		private string _logNewFileName = "/new.log";
+		private string _logOldFileName = "/old.log";
+
+		private string _LogPath = string.Empty;
         /// <summary>
-        /// 指定日志输出到哪个文件
+        /// 指定日志输出到哪个路径，不含文件名
         /// </summary>
         public string LogPath
         {
@@ -238,7 +241,7 @@ namespace CSSharpTools
 			}
 			else
 			{
-				LogPath = "D:\\myLogFile.log";
+				//LogPath = "D:\\myLogFile.log";
 			}
 
 			// 如果是在 windows Android iOS 平台，需要输出到文件，且包含指定日志
@@ -258,7 +261,30 @@ namespace CSSharpTools
 		{
 			// 备份文件
 
+			string sourceFile = LogPath + _logNewFileName;
+			string destinationFile = LogPath + _logOldFileName;
+			try
+			{
+				// 确保目标路径存在
+				if (!Directory.Exists(LogPath))
+				{
+					Directory.CreateDirectory(LogPath);
+				}
+
+				// 复制文件
+				File.Copy(sourceFile, destinationFile, true); // true 表示如果目标文件存在，则覆盖它
+			}
+			catch (IOException ioEx)
+			{
+				Console.WriteLine("发生IO错误: " + ioEx.Message);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("发生错误: " + ex.Message);
+			}
+
 			string _log = "";
+
 			while (true)
 			{
 				if (logsWillOutputToFile.Count > 0 && !string.IsNullOrEmpty(LogPath))
@@ -269,7 +295,7 @@ namespace CSSharpTools
 					}
 					// 拼接字符串
 
-					File.AppendAllText(LogPath, string.Format("{0}{1}", _log, Environment.NewLine), new UTF8Encoding(false));
+					File.AppendAllText(sourceFile, string.Format("{0}{1}", _log, Environment.NewLine), new UTF8Encoding(false));
 
 				}
 
