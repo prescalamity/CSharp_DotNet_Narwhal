@@ -69,14 +69,14 @@ namespace CSSharpTools
             long flag2_6 = DateTime.UtcNow.Ticks;
 
 
-            LogModule.Instance.Init(LogController.OutputToConsole + LogController.LogWihtoutStrConnect);
+            LogModule.Instance.Init( LogController.OutputToFile + LogController.PersonDebug);
 
 
             long flag3 = DateTime.UtcNow.Ticks;
             for (int i = 0; i < MaxCount; i++)
             {
                 //LogModule.Info($"Test.RunThis, i={i}");
-                LogModule.LogWihtoutStrConnect($"Test.RunThis, i=-1");
+                LogModule.PersonDebug($"Test.RunThis, i={i}");
             }
             long flag4 = DateTime.UtcNow.Ticks;
 

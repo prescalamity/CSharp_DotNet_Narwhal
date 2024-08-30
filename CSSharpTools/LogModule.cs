@@ -8,27 +8,40 @@
  */
 
 
+
+using System.Text;
+/**
+* 
+* 日志模块，
+* 实现输出指定 等级的日志 到 指定文件中
+* 
+* (暂时缺少具体路径文件流的实现)
+* 
+*/
 namespace CSSharpTools
 {
     public class LogModule
     {
 
-        #region 模块对外接口
+		#region 模块对外接口
+
+		public static string TAG = "PersonDebug, ";
 
         /// <summary>
         /// 包含字符串拼接，不应该在发布版中 运行，
         /// 初衷是在查找某个 bug 的时候使用，
         /// </summary>
-        public static void PersonDebug(string content, string tag = "PersonDebug, ")
+        public static void PersonDebug( string content, params object[] args)
         {
-            content = tag + content;
-            Instance.ControllerPrintLog(content, LogController.PersonDebug);
+			content = TAG + string.Format(content, args);
+			Instance.ControllerPrintLog(content, LogController.PersonDebug);
         }
 
-        /// <summary>
-        /// 普通的不带字符串连接的日志，resStr = "str1";
-        /// </summary>
-        public static void LogWihtoutStrConnect(string content)
+
+		/// <summary>
+		/// 普通的不带字符串连接的日志，resStr = "str1";
+		/// </summary>
+		public static void LogWihtoutStrConnect(string content)
         {
             Instance.ControllerPrintLog(content, LogController.LogWihtoutStrConnect);
         }
@@ -37,9 +50,11 @@ namespace CSSharpTools
         /// 普通的带有字符串连接的日志，例如：resStr = "str1" + data;
         /// </summary>
         /// <param name="content"></param>
-        public static void LogWithStrConnect(string content)
+        public static void LogWithStrConnect(string content, params object[] args)
         {
-            Instance.ControllerPrintLog(content, LogController.LogWithStrConnect);
+			content = string.Format(content, args);
+
+			Instance.ControllerPrintLog(content, LogController.LogWithStrConnect);
 
         }
 
@@ -62,6 +77,11 @@ namespace CSSharpTools
         }
 
         #endregion
+
+		/// <summary>
+		/// 日志锁
+		/// </summary>
+		public static object lockLogQueue = new object();
 
 
         private string _LogPath = string.Empty;
@@ -97,6 +117,12 @@ namespace CSSharpTools
         }
 
 
+		private Queue<string> logsWillOutputToFile = new Queue<string>();
+
+
+		/// <summary>
+		/// 当前已输出日志的行数
+		/// </summary>
         private int logCount = 0;
 
         /// <summary>
@@ -140,10 +166,15 @@ namespace CSSharpTools
             //{
             //    Console.WriteLine($"LogModule.RunThis, {_NeedOutputLogs} contain {LogController.PersonDebug}");
             //}
-
-            LogPath = logPath;
             NeedOutputLogs = needOutputLogs;
-        }
+
+
+			if ((_NeedOutputLogs & LogController.OutputToFile) != 0)
+			{
+				InitLogFile(logPath);
+			}
+
+		}
 
 
         private void ControllerPrintLog(string content, int logLevel)
@@ -157,17 +188,17 @@ namespace CSSharpTools
                 if(logCount == (_LogMaxCount - 1))
                 {
                     // 输出已超过最大的日志行数
-                    PrintLog($"Warning: logs over {_LogMaxCount}, and no longer print after logs.");
+                    OutputLog($"Warning: logs over {_LogMaxCount}, and no longer print after logs.");
                 }
 
                 return;
             }
 
-            PrintLog(content);
+            OutputLog(content);
 
         }
 
-        private void PrintLog(string content)
+        private void OutputLog(string content)
         {
 
             // 需要输出到控制台，且包含指定日志
@@ -180,9 +211,13 @@ namespace CSSharpTools
             // 需要输出到文件，且包含指定日志
             if ((_NeedOutputLogs & LogController.OutputToFile) != 0)
             {
-                // 输出到外部文件中
+				// 输出到外部文件中
+				lock (lockLogQueue)
+				{
+					logsWillOutputToFile.Enqueue(content);
+				}
 
-            }
+			}
 
             if (((_NeedOutputLogs & LogController.OutputToConsole) != 0) || ((_NeedOutputLogs & LogController.OutputToFile) != 0))
             {
@@ -192,9 +227,71 @@ namespace CSSharpTools
         }
 
 
+		/// <summary>
+		/// 初始化日志文件
+		/// </summary>
+		private void InitLogFile(string logPath)
+		{
+			if (!string.IsNullOrEmpty(logPath))
+			{
+				LogPath = logPath;
+			}
+			else
+			{
+				LogPath = "D:\\myLogFile.log";
+			}
+
+			// 如果是在 windows Android iOS 平台，需要输出到文件，且包含指定日志
+			if ((_NeedOutputLogs & LogController.OutputToFile) != 0)
+			{
+				// 创建新的线程
+				Thread myThread = new Thread(new ThreadStart(_OutputLogToFileInWindowsAndroidIos));
+				myThread.Start();
+
+			}
+		}
+
+		/// <summary>
+		/// 必须是新的线程调用，在 windows Android iOS 平台
+		/// </summary>
+		private void _OutputLogToFileInWindowsAndroidIos()
+		{
+			// 备份文件
+
+			string _log = "";
+			while (true)
+			{
+				if (logsWillOutputToFile.Count > 0 && !string.IsNullOrEmpty(LogPath))
+				{
+					lock(lockLogQueue) 
+					{
+						_log = logsWillOutputToFile.Dequeue();
+					}
+					// 拼接字符串
+
+					File.AppendAllText(LogPath, string.Format("{0}{1}", _log, Environment.NewLine), new UTF8Encoding(false));
+
+				}
+
+				//Thread.Sleep(30); // 休眠30毫秒
+			}
+		}
+
+
     }
 
-
+	/// <summary>
+	/// 单个日志元素
+	/// </summary>
+	public class LogContent
+	{
+		int LogLevel;
+		string tag="";
+		string logFormet = "";
+		object[] args = null;
+		long time;
+		long frameCount;
+	}
 
     ///// <summary>
     ///// 日志等级，一共8个，共 255个 组合
