@@ -3,21 +3,13 @@
  * 日志模块，
  * 实现输出指定 等级的日志 到 指定文件中
  * 
- * (暂时缺少具体路径文件流的实现)
+ * 还需要访问网络，生产设备唯一码 来判断是否更新本设备的日志规则
  * 
  */
 
 
-
 using System.Text;
-/**
-* 
-* 日志模块，
-* 实现输出指定 等级的日志 到 指定文件中
-* 
-* (暂时缺少具体路径文件流的实现)
-* 
-*/
+
 namespace CSSharpTools
 {
     public class LogModule
@@ -127,6 +119,8 @@ namespace CSSharpTools
 		/// 当前已输出日志的行数
 		/// </summary>
         private int logCount = 0;
+
+
 
         /// <summary>
         /// 外部不能 new 本类
