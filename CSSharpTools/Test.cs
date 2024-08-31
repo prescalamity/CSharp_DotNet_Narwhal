@@ -80,13 +80,22 @@ namespace CSSharpTools
             }
             long flag4 = DateTime.UtcNow.Ticks;
 
+            LogContent resLogContent=new LogContent();
+
+            for (int i = 0; i < MaxCount; i++)
+            {
+                resLogContent = new LogContent();
+                resLogContent.frameCount = i;
+            }
+
+            long flag5 = DateTime.UtcNow.Ticks;
 
             //long end = Timer.DateTimeToLongTimeStamp();
 
             //Console.WriteLine($"Start here, time totle: -- ms, \n flag1={flag1}, \n flag2={flag2}, ns");
 
             Console.WriteLine($"Test.RunThis, testStr={testStr}, MaxCount: {MaxCount}, flag1={flag1}, + = {flag2-flag1}00 ns, CallFunction = {flag2_1 - flag2}00 ns, CallFunctionInit = {flag2_5- flag2_1}00 ns, " +
-                $"CallFunctionBool = {flag2_6-flag2_5}00 ns, CallFunctionInit = {flag3 - flag2_6}00 ns, CallFunctionPrint = {flag4-flag3}00 ns.");
+                $"CallFunctionBool = {flag2_6-flag2_5}00 ns, CallFunctionInit = {flag3 - flag2_6}00 ns, CallFunctionPrint = {flag4-flag3}00 ns. newTotalTime = {flag5-flag4}00 ns, logID={resLogContent.frameCount}");
 
             //Sub1 sub = new Sub1();
             //sub.Say();

@@ -253,9 +253,11 @@ namespace CSSharpTools
 		/// </summary>
 		private void _OutputLogToFileInWindowsAndroidIos()
 		{
-			// 备份文件
 
-			string sourceFile = LogPath + _logNewFileName;
+            if (string.IsNullOrEmpty(LogPath)) { return; }
+                // 备份文件
+
+            string sourceFile = LogPath + _logNewFileName;
 			string destinationFile = LogPath + _logOldFileName;
 			try
 			{
@@ -305,12 +307,12 @@ namespace CSSharpTools
 	/// </summary>
 	public class LogContent
 	{
-		int LogLevel;
-		string tag="";
-		string logFormet = "";
-		object[] args = null;
-		long time;
-		long frameCount;
+        public int LogLevel;
+        public string tag ="";
+        public string logFormet = "";
+        public object[] args = null;
+        public long time;
+        public long frameCount;
 	}
 
     ///// <summary>
