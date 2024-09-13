@@ -92,7 +92,7 @@ namespace CSSharpTools
 
         private int _NeedOutputLogs = LogController.OutputToConsole + LogController.Error + LogController.ProgramImportantNode;
         /// <summary>
-        /// 指定 LogController中 哪些等级的日志可以输出，
+        /// 指定 LogController中 哪些等级的日志可以输出，这个是从文件中获得的，并且从网络中更新
         /// 默认是错误和程序流程节点日志
         /// </summary>
         public int NeedOutputLogs
