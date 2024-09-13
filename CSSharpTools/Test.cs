@@ -26,19 +26,24 @@ namespace CSSharpTools
 
             //new Sortings().RunThis(); 
 
+			FileTool.BackupFiles();
 
+            //Sub1 sub = new Sub1();
+            //sub.Say();
+        }
 
+		public void testLogModule()
+		{
+			//long start = Timer.DateTimeToLongTimeStamp();
 
-
-            //long start = Timer.DateTimeToLongTimeStamp();
-
-            int couter = 0;
+			int couter = 0;
 			string testStr = "";
 
-            StringBuilder sb = new StringBuilder();
+			StringBuilder sb = new StringBuilder();
 
 			long flag1 = DateTime.UtcNow.Ticks;
-            for (int i = 0; i < MaxCount; i++) {
+			for (int i = 0; i < MaxCount; i++)
+			{
 				//couter++;
 				//if (couter == -1) { couter++; }
 				//testStr = "Test.RunThis, i=-1";
@@ -49,64 +54,62 @@ namespace CSSharpTools
 				//testStr = string.Format("Test.RunThis, i={0}", i);
 			}
 
-            long flag2 = DateTime.UtcNow.Ticks;
+			long flag2 = DateTime.UtcNow.Ticks;
 
-            for (int i = 0; i < MaxCount; i++)
-            {
-                Sub1.ThisStaticFunc("");
-            }
-            long flag2_1 = DateTime.UtcNow.Ticks;
-            
-
-            LogModule.Instance.Init(LogController.Close);
+			for (int i = 0; i < MaxCount; i++)
+			{
+				Sub1.ThisStaticFunc("");
+			}
+			long flag2_1 = DateTime.UtcNow.Ticks;
 
 
-            long flag2_5 = DateTime.UtcNow.Ticks;
-            for (int i = 0; i < MaxCount; i++)
-            {
-                LogModule.LogWihtoutStrConnect($"Test.RunThis, i=-1");
-            }
-            long flag2_6 = DateTime.UtcNow.Ticks;
+			LogModule.Instance.Init(LogController.Close);
 
 
-            LogModule.Instance.Init( LogController.OutputToFile + LogController.PersonDebug);
+			long flag2_5 = DateTime.UtcNow.Ticks;
+			for (int i = 0; i < MaxCount; i++)
+			{
+				LogModule.LogWihtoutStrConnect($"Test.RunThis, i=-1");
+			}
+			long flag2_6 = DateTime.UtcNow.Ticks;
 
 
-            long flag3 = DateTime.UtcNow.Ticks;
-            for (int i = 0; i < MaxCount; i++)
-            {
-                //LogModule.Info($"Test.RunThis, i={i}");
-                LogModule.PersonDebug($"Test.RunThis, i={i}");
-            }
-            long flag4 = DateTime.UtcNow.Ticks;
+			LogModule.Instance.Init(LogController.OutputToFile + LogController.PersonDebug);
 
-            LogContent resLogContent=new LogContent();
 
-            for (int i = 0; i < MaxCount; i++)
-            {
-                resLogContent = new LogContent();
-                resLogContent.frameCount = i;
-            }
+			long flag3 = DateTime.UtcNow.Ticks;
+			for (int i = 0; i < MaxCount; i++)
+			{
+				//LogModule.Info($"Test.RunThis, i={i}");
+				LogModule.PersonDebug($"Test.RunThis, i={i}");
+			}
+			long flag4 = DateTime.UtcNow.Ticks;
 
-            long flag5 = DateTime.UtcNow.Ticks;
+			LogContent resLogContent = new LogContent();
 
-            //long end = Timer.DateTimeToLongTimeStamp();
+			for (int i = 0; i < MaxCount; i++)
+			{
+				resLogContent = new LogContent();
+				resLogContent.frameCount = i;
+			}
 
-            //Console.WriteLine($"Start here, time totle: -- ms, \n flag1={flag1}, \n flag2={flag2}, ns");
+			long flag5 = DateTime.UtcNow.Ticks;
 
-            Console.WriteLine($"Test.RunThis, testStr={testStr}, MaxCount: {MaxCount}, flag1={flag1}, + = {flag2-flag1}00 ns, CallFunction = {flag2_1 - flag2}00 ns, CallFunctionInit = {flag2_5- flag2_1}00 ns, " +
-                $"CallFunctionBool = {flag2_6-flag2_5}00 ns, CallFunctionInit = {flag3 - flag2_6}00 ns, CallFunctionPrint = {flag4-flag3}00 ns. newTotalTime = {flag5-flag4}00 ns, logID={resLogContent.frameCount}");
+			//long end = Timer.DateTimeToLongTimeStamp();
 
-            //Sub1 sub = new Sub1();
-            //sub.Say();
-        }
+			//Console.WriteLine($"Start here, time totle: -- ms, \n flag1={flag1}, \n flag2={flag2}, ns");
 
-        /// <summary>
-        /// n 的阶乘
-        /// </summary>
-        /// <param name="n"></param>
-        /// <returns></returns>
-        private int Factorial(int n)
+			Console.WriteLine($"Test.RunThis, testStr={testStr}, MaxCount: {MaxCount}, flag1={flag1}, + = {flag2 - flag1}00 ns, CallFunction = {flag2_1 - flag2}00 ns, CallFunctionInit = {flag2_5 - flag2_1}00 ns, " +
+				$"CallFunctionBool = {flag2_6 - flag2_5}00 ns, CallFunctionInit = {flag3 - flag2_6}00 ns, CallFunctionPrint = {flag4 - flag3}00 ns. newTotalTime = {flag5 - flag4}00 ns, logID={resLogContent.frameCount}");
+
+		}
+
+		/// <summary>
+		/// n 的阶乘
+		/// </summary>
+		/// <param name="n"></param>
+		/// <returns></returns>
+		private int Factorial(int n)
         {
             if (n < 2) return n;
             return n * Factorial(n - 1);
