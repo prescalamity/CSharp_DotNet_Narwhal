@@ -38,33 +38,41 @@ namespace CSSharpTools
 
 			foreach (string file in files)
 			{
-				string filePath = FilesRootPath + file;
+				string sourceFile = FilesRootPath + file;
 
-				if ( filePath.EndsWith(".prefab")) //File.Exists(filePath) &&
+				if (sourceFile.EndsWith(".prefab")) //File.Exists(sourceFile) &&
 				{ 
-					counter++;
 
-					string pathOnly = Path.GetDirectoryName(filePath);
+					string destinationFile = sourceFile;
 
-					Console.WriteLine(pathOnly);
+					// 新的目标文件路径
+					destinationFile = destinationFile.Replace("Assets", "Assets_H");
 
-					if (pathOnly == null) continue;
+					// 目标文件的地址，不包含文件名
+					string destinationDirectory = Path.GetDirectoryName(destinationFile);
 
-					pathOnly = pathOnly.Replace("Assets", "Assets_H");
+					//Console.WriteLine(destinationDirectory);
 
-					if (!Directory.Exists(pathOnly)) { 
+					if (destinationDirectory == null) continue;
 
-						Directory.CreateDirectory(pathOnly); 
-
+					if (!Directory.Exists(destinationDirectory))
+					{
+						Directory.CreateDirectory(destinationDirectory);
 					}
+
+					// string sourceFile = @"C:\source\myfile.txt";
+					// string destinationFile = @"C:\destination\myfile.txt";
+					// true 表示如果目标文件存在，则覆盖它
+					//File.Copy(sourceFile, destinationFile, true);
+
+					counter++;
 				}
+
 			}
 
 			Console.WriteLine("FileTool.BackupFiles, counter=" + counter);
 
 		}
-
-
 
 
 
