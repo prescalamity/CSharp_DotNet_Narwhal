@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace CSSharpTools
@@ -14,26 +15,27 @@ namespace CSSharpTools
             //Console.WriteLine(Factorial(3));
 
 
-            LogModule.Instance.Init( LogController.OutputToFile + LogController.LogWithStrConnect);
+            //LogModule.Instance.Init( LogController.OutputToFile + LogController.LogWithStrConnect);
 
-            //Stack<int> sta = new Stack<int>();
-            //sta.Push(0);
-            //sta.Push(1);
-            //sta.Push(2);
-            //sta.Push(3);
-            //sta.Push(4);
-            //foreach (int i in sta) Console.WriteLine(i);
-            //reverseStack(sta);
-            //foreach (int i in sta) Console.WriteLine(i);
+			//Stack<int> sta = new Stack<int>();
+			//sta.Push(0);
+			//sta.Push(1);
+			//sta.Push(2);
+			//sta.Push(3);
+			//sta.Push(4);
+			//foreach (int i in sta) Console.WriteLine(i);
+			//reverseStack(sta);
+			//foreach (int i in sta) Console.WriteLine(i);
 
-            //new Sortings().RunThis(); 
+			//new Sortings().RunThis(); 
 
-			FileTool.BackupFiles();
+			//FileTool.BackupFiles();
 
-            //Sub1 sub = new Sub1();
-            //sub.Say();
 
-            Console.WriteLine("Test.RunThis! End.");
+			//Sub1 sub = new Sub1();
+			//sub.Say();
+
+			Console.WriteLine("Test.RunThis! End.");
         }
 
 		public void testLogModule()
