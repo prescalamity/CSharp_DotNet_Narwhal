@@ -59,15 +59,17 @@ namespace CSSharpTools
                         Directory.CreateDirectory(destinationDirectory);
                     }
 
-                    CopyFileDirMeta(sourceFile.Replace(FilesRootPath, "") );
 
-                    // string sourceFile = @"C:\source\myfile.txt";
-                    // string destinationFile = @"C:\destination\myfile.txt";
-                    // true 表示如果目标文件存在，则覆盖它
-                    File.Copy(sourceFile, destinationFile, true);
-                    File.Copy(sourceFile + ".meta", destinationFile + ".meta", true);
+					// 还要处理文件夹的 .meta
+					//CopyFileDirMeta(sourceFile.Replace(FilesRootPath, "") );
 
-                    // 还要处理文件夹的 .meta
+
+					// string sourceFile = @"C:\source\myfile.txt";
+					// string destinationFile = @"C:\destination\myfile.txt";
+					// true 表示如果目标文件存在，则覆盖它
+					File.Copy(sourceFile, destinationFile, true);
+
+                    //File.Copy(sourceFile + ".meta", destinationFile + ".meta", true);
 
 
                     counter++;
@@ -85,7 +87,7 @@ namespace CSSharpTools
 
 
         /// <summary>
-        /// 递归处理文件，传入相对路径
+        /// 递归处理文件，传入相对路径，例如 unity的 meta 文件
         /// </summary>
         /// <param name="path"></param>
         public static void CopyFileDirMeta(string path)
