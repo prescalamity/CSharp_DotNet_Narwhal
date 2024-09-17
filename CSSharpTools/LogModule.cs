@@ -75,6 +75,10 @@ namespace CSSharpTools
 		/// </summary>
 		public static object lockLogQueue = new object();
 
+		/// <summary>
+		/// 日志的默认路径
+		/// </summary>
+		private static string defluatLogPath = "E:\\_YZ1_Dev\\Game_64\\Bin\\Client\\Game\\";
 
 		private string _logNewFileName = "/new.log";
 		private string _logOldFileName = "/old.log";
@@ -239,7 +243,7 @@ namespace CSSharpTools
 			}
 			else
 			{
-				//LogPath = "D:\\myLogFile.log";
+				LogPath = defluatLogPath;
 			}
 
 			// 如果是在 windows Android iOS 平台，需要输出到文件，且包含指定日志
@@ -283,10 +287,12 @@ namespace CSSharpTools
 			catch (IOException ioEx)
 			{
 				Console.WriteLine("发生IO错误: " + ioEx.Message);
+				return;
 			}
 			catch (Exception ex)
 			{
 				Console.WriteLine("发生错误: " + ex.Message);
+				return;
 			}
 
 			string _log = "";

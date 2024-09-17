@@ -14,8 +14,7 @@ namespace CSSharpTools
             //Console.WriteLine(Factorial(3));
 
 
-            LogModule.Instance.Init( LogController.OutputToFile + LogController.LogWithStrConnect, 
-                "E:\\_YZ1_Dev\\Game_64\\Bin\\Client\\Game\\");
+            LogModule.Instance.Init( LogController.OutputToFile + LogController.LogWithStrConnect);
 
             //Stack<int> sta = new Stack<int>();
             //sta.Push(0);
