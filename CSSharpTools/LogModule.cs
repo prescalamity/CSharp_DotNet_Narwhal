@@ -78,7 +78,7 @@ namespace CSSharpTools
 		/// <summary>
 		/// 日志的默认路径
 		/// </summary>
-		private static string defluatLogPath = "E:\\_YZ1_Dev\\Game_64\\Bin\\Client\\Game\\";
+		private static string defluatLogPath = "D:\\LogModuleLgy";
 
 		private string _logNewFileName = "/new.log";
 		private string _logOldFileName = "/old.log";
