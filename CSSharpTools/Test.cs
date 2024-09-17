@@ -12,10 +12,13 @@ namespace CSSharpTools
         public void RunThis()
         {
             Console.WriteLine("Test.RunThis!");
-            //Console.WriteLine(Factorial(3));
+			//Console.WriteLine(Factorial(3));
 
 
-            //LogModule.Instance.Init( LogController.OutputToFile + LogController.LogWithStrConnect);
+			//LogModule.Instance.Init( LogController.OutputToFile + LogController.LogWithStrConnect);
+
+			//FileTool.BackupFiles();
+
 
 			//Stack<int> sta = new Stack<int>();
 			//sta.Push(0);
@@ -28,8 +31,6 @@ namespace CSSharpTools
 			//foreach (int i in sta) Console.WriteLine(i);
 
 			//new Sortings().RunThis(); 
-
-			//FileTool.BackupFiles();
 
 
 			//Sub1 sub = new Sub1();
