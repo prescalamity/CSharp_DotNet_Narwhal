@@ -311,7 +311,7 @@ namespace CSSharpTools
 
 				}
 
-				//Thread.Sleep(30); // 休眠30毫秒
+				Thread.Sleep(30); // 休眠30毫秒
 			}
 		}
 
