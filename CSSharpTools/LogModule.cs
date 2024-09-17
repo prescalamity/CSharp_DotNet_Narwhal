@@ -148,10 +148,14 @@ namespace CSSharpTools
             set { instance = value; }
         }
 
-
+        /// <summary>
+        /// logPath，日志文件路径不包含 文件名，文件名固定是 new.log
+        /// </summary>
+        /// <param name="needOutputLogs"></param>
+        /// <param name="logPath"></param>
         public void Init(int needOutputLogs, string logPath="")
         {
-            ///Console.WriteLine($"LogModule.Init, logPath={logPath}, needOutputLogs={needOutputLogs}");
+            Console.WriteLine($"LogModule.Init, needOutputLogs={needOutputLogs}, logPath={logPath}");
 
             //_NeedOutputLogs += LogController.PersonDebug;
 
@@ -163,8 +167,8 @@ namespace CSSharpTools
             //{
             //    Console.WriteLine($"LogModule.RunThis, {_NeedOutputLogs} contain {LogController.PersonDebug}");
             //}
-            NeedOutputLogs = needOutputLogs;
 
+            NeedOutputLogs = needOutputLogs;
 
 			if ((_NeedOutputLogs & LogController.OutputToFile) != 0)
 			{
@@ -267,8 +271,14 @@ namespace CSSharpTools
 					Directory.CreateDirectory(LogPath);
 				}
 
-				// 复制文件
-				File.Copy(sourceFile, destinationFile, true); // true 表示如果目标文件存在，则覆盖它
+                if (File.Exists(sourceFile)) { 
+				    // 复制文件
+				    File.Copy(sourceFile, destinationFile, true); // true 表示如果目标文件存在，则覆盖它
+                    // 删除文件
+                    File.Delete(sourceFile);
+                }
+
+
 			}
 			catch (IOException ioEx)
 			{
@@ -289,8 +299,8 @@ namespace CSSharpTools
 					{
 						_log = logsWillOutputToFile.Dequeue();
 					}
-					// 拼接字符串
 
+					// 拼接字符串
 					File.AppendAllText(sourceFile, string.Format("{0}{1}", _log, Environment.NewLine), new UTF8Encoding(false));
 
 				}

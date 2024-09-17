@@ -13,6 +13,10 @@ namespace CSSharpTools
             Console.WriteLine("Test.RunThis!");
             //Console.WriteLine(Factorial(3));
 
+
+            LogModule.Instance.Init( LogController.OutputToFile + LogController.LogWithStrConnect, 
+                "E:\\_YZ1_Dev\\Game_64\\Bin\\Client\\Game\\");
+
             //Stack<int> sta = new Stack<int>();
             //sta.Push(0);
             //sta.Push(1);
@@ -23,13 +27,14 @@ namespace CSSharpTools
             //reverseStack(sta);
             //foreach (int i in sta) Console.WriteLine(i);
 
-
             //new Sortings().RunThis(); 
 
 			FileTool.BackupFiles();
 
             //Sub1 sub = new Sub1();
             //sub.Say();
+
+            Console.WriteLine("Test.RunThis! End.");
         }
 
 		public void testLogModule()
