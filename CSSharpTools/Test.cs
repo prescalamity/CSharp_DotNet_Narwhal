@@ -12,31 +12,31 @@ namespace CSSharpTools
         public void RunThis()
         {
             Console.WriteLine("Test.RunThis!");
-			//Console.WriteLine(Factorial(3));
+            //Console.WriteLine(Factorial(3));
 
 
-			//LogModule.Instance.Init( LogController.OutputToFile + LogController.LogWithStrConnect);
+            //LogModule.Instance.Init( LogController.OutputToFile + LogController.LogWithStrConnect);
 
-			//FileTool.BackupFiles();
+            //FileTool.BackupFiles();
+            FileTool.CompareFileListFiles();
+
+            //Stack<int> sta = new Stack<int>();
+            //sta.Push(0);
+            //sta.Push(1);
+            //sta.Push(2);
+            //sta.Push(3);
+            //sta.Push(4);
+            //foreach (int i in sta) Console.WriteLine(i);
+            //reverseStack(sta);
+            //foreach (int i in sta) Console.WriteLine(i);
+
+            //new Sortings().RunThis(); 
 
 
-			//Stack<int> sta = new Stack<int>();
-			//sta.Push(0);
-			//sta.Push(1);
-			//sta.Push(2);
-			//sta.Push(3);
-			//sta.Push(4);
-			//foreach (int i in sta) Console.WriteLine(i);
-			//reverseStack(sta);
-			//foreach (int i in sta) Console.WriteLine(i);
+            //Sub1 sub = new Sub1();
+            //sub.Say();
 
-			//new Sortings().RunThis(); 
-
-
-			//Sub1 sub = new Sub1();
-			//sub.Say();
-
-			Console.WriteLine("Test.RunThis! End.");
+            Console.WriteLine("Test.RunThis! End.");
         }
 
 		public void testLogModule()
