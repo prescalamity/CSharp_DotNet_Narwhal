@@ -11,15 +11,18 @@ namespace CSSharpTools
 	public class FileTool
 	{
 
-		/// <summary>
-		/// 备份文件的根路径
-		/// </summary>
-		public static string FilesRootPath= "E:\\_YZ1_Dev\\Game_64\\Client\\";
+        
+        #region ---------------------------备份路径下的某些符合要求的文件----------------------------------------
+
+        /// <summary>
+        /// 备份文件的根路径
+        /// </summary>
+        public static string FilesRootPath= "E:\\_YZ1_Dev\\Game_64\\Bin\\Client\\Game\\Assets\\";
 
 		/// <summary>
 		/// 保存了备份文件列表的文件路径
 		/// </summary>
-		public static string FileListFilePath = "E:\\_YZ1_Dev\\Game_64\\Bin\\Client\\Game\\BackupFiles.log";
+		public static string FileListFilePath = "E:\\LogDiffFileLgy - 副本.log";
 
 		/// <summary>
 		/// 根据文件列表备份文件
@@ -41,11 +44,11 @@ namespace CSSharpTools
 			{
 				string sourceFile = FilesRootPath + file;
 
-                if (File.Exists(sourceFile) && sourceFile.EndsWith(".cs")) // File.Exists(sourceFile) &&
+                if (File.Exists(sourceFile) && sourceFile.EndsWith(".prefab")) // File.Exists(sourceFile) &&
                 {
 
                     // 新的目标文件路径
-                    string destinationFile = sourceFile.Replace("Client", "Client_H");
+                    string destinationFile = sourceFile.Replace("Assets", "Assets_H");
 
                     // 目标文件的地址，不包含文件名
                     string destinationDirectory = Path.GetDirectoryName(destinationFile);
@@ -59,9 +62,9 @@ namespace CSSharpTools
                         Directory.CreateDirectory(destinationDirectory);
                     }
 
-
-					// 还要处理文件夹的 .meta
-					//CopyFileDirMeta(sourceFile.Replace(FilesRootPath, "") );
+                    string sourceFileDir = Path.GetDirectoryName(sourceFile);
+                    // 还要处理文件夹的 .meta
+                    CopyFileDirMeta(sourceFileDir.Replace(FilesRootPath, "") );
 
 
 					// string sourceFile = @"C:\source\myfile.txt";
@@ -69,7 +72,7 @@ namespace CSSharpTools
 					// true 表示如果目标文件存在，则覆盖它
 					File.Copy(sourceFile, destinationFile, true);
 
-                    //File.Copy(sourceFile + ".meta", destinationFile + ".meta", true);
+                    File.Copy(sourceFile + ".meta", destinationFile + ".meta", true);
 
 
                     counter++;
@@ -121,11 +124,16 @@ namespace CSSharpTools
 
         }
 
+        #endregion ---------------------------备份路径下的某些符合要求的文件----------------------------------------
+
+
+
+        #region --------------------------- 比较两个文件并将结果保存 ---------------------------------------------
 
         /// <summary>
-		/// 要比较的文件 File1
-		/// </summary>
-		public static string CompareFileListFilePath1 = "E:/LogModuleLgy - 副本 - 副本.log";
+        /// 要比较的文件 File1
+        /// </summary>
+        public static string CompareFileListFilePath1 = "E:/LogModuleLgy - 副本 - 副本.log";
 
         /// <summary>
         /// 要比较的文件 File2
@@ -186,6 +194,35 @@ namespace CSSharpTools
 
             Console.WriteLine("FileTool.CompareFileListFiles");
         }
+
+
+        #endregion --------------------------- 比较两个文件并将结果保存 ---------------------------------------------
+
+
+
+        #region ---------------------按规则修改指定文件中的内容----------------------------------------------
+
+
+        public static string mfcFilePath = "C:\\Users\\Administrator\\Desktop\\dasdas.log";
+
+        public static void modifyFileContent()
+        {
+
+            string[] files1 = File.ReadAllLines(mfcFilePath);
+            int counter = 0;
+            for(int i =0; i<files1.Length; i++)
+            {
+                if (files1[i].Contains("好友0")) {
+                    files1[i] = files1[i].Replace("好友0", "好友" + counter++);
+                }
+            }
+
+            File.WriteAllLines(mfcFilePath, files1, new UTF8Encoding(false));
+
+        }
+
+        #endregion ---------------------按规则修改指定文件中的内容---------------------------------------------
+
 
 
     }
