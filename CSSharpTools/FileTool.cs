@@ -133,25 +133,24 @@ namespace CSSharpTools
         /// <summary>
         /// 要比较的文件 File1
         /// </summary>
-        public static string CompareFileListFilePath1 = "E:/LogModuleLgy - 副本 - 副本.log";
+        public static string CompareFileListFilePath1 = "E:\\_MyFont\\新华字典汉字16142.txt";
 
         /// <summary>
         /// 要比较的文件 File2
         /// </summary>
-        public static string CompareFileListFilePath2 = "E:/LogModuleLgyCompareRes - 副本2.log";
+        public static string CompareFileListFilePath2 = "E:\\_MyFont\\常用汉字8105.txt";
 
         /// <summary>
         /// 比较后的结果文件 File2
         /// </summary>
-        public static string CompareFileListFilePathRes = "E:/LogModuleLgyCompareRes.log";
+        public static string CompareFileListFilePathRes = "E:\\_MyFont\\汉字16142-8105.txt";
 
 
         /// <summary>
-        /// 对比两个文件中不同的文件
+        /// 对比两个文件中不同的文件，存在或不存在
         /// </summary>
         public static void CompareFileListFiles()
         {
-
             if (string.IsNullOrEmpty(CompareFileListFilePath1)) { return; }
             if (string.IsNullOrEmpty(CompareFileListFilePath2)) { return; }
 
@@ -159,37 +158,41 @@ namespace CSSharpTools
             //if (!File.Exists(CompareFileListFilePath1)) { return; }
             //if (!File.Exists(CompareFileListFilePath2)) { return; }
 
+
             //LogModule.LogWithStrConnect("FileTool.CompareFileListFiles, CompareFileListFilePath1=" + CompareFileListFilePath1);
+
 
             string[] files1 = File.ReadAllLines(CompareFileListFilePath1);
             string[] files2 = File.ReadAllLines(CompareFileListFilePath2);
 
             int counter = 0;
 
-            for (int i=0; i< files1.Length; i++)
+            for (int i = 0; i< files1.Length; i++)
             {
-                bool exsit = false;
+                bool flag = true;
 
                 for (int j = 0; j < files2.Length; j++)
                 {
-                    if ( !string.IsNullOrEmpty(files1[i]) && !string.IsNullOrEmpty(files2[j]) && files1[i].Contains(files2[j]) ) {
-                        exsit = true;
-                        continue;
+                    // file1 中的元素存在于 file2
+                    if ( !string.IsNullOrEmpty(files1[i]) && !string.IsNullOrEmpty(files2[j]) && files1[i].Contains(files2[j]) ) 
+                    {
+                        flag = false;
+                        // continue;
+                        break;
                     }
+
                 }
 
-                if (exsit) {
-
+                if (flag) {
                     // 包含就保存
                     counter++;
-
-                    File.AppendAllText(CompareFileListFilePathRes, string.Format("{0}lgy{1}{2}", Environment.NewLine, files1[i],
-                        Environment.NewLine), new UTF8Encoding(false));
+                    File.AppendAllText(CompareFileListFilePathRes, string.Format("{0}{1}", files1[i], Environment.NewLine), new UTF8Encoding(false));
                 }
+
             }
 
-            File.AppendAllText(CompareFileListFilePathRes, string.Format("{0}counter--->{1}{2}", Environment.NewLine, counter, 
-                Environment.NewLine), new UTF8Encoding(false));
+            //File.AppendAllText(CompareFileListFilePathRes, string.Format("{0}counter--->{1}{2}", Environment.NewLine, counter, 
+            //    Environment.NewLine), new UTF8Encoding(false));
 
 
             Console.WriteLine("FileTool.CompareFileListFiles");
