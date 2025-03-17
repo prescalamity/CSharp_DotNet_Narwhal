@@ -18,7 +18,8 @@ namespace CSSharpTools
             //LogModule.Instance.Init( LogController.OutputToFile + LogController.LogWithStrConnect);
 
             //FileTool.modifyFileContent();
-            FileTool.CompareFileListFiles();
+            //FileTool.CompareFileListFiles();
+            FileTool.DeleteTheFileBySuffix();
 
             //Stack<int> sta = new Stack<int>();
             //sta.Push(0);

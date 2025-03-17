@@ -11,7 +11,57 @@ namespace CSSharpTools
 	public class FileTool
 	{
 
-        
+
+
+        #region ---------------------------删除文件夹下指定后缀的文件----------------------------------------
+
+        /// <summary>
+        /// 指定的文件夹
+        /// </summary>
+        public static string FolderForDeleteFile = "D:\\YZ1_Dev_Tuanjie\\Bin\\Client\\Game_Harmony\\Assets\\StreamingAssets\\OpenHarmony\\Data";
+
+        /// <summary>
+        /// 后缀的匹配模式
+        /// </summary>
+        public static string theSuffixSearchPattern = "*.manifest";
+
+        /// <summary>
+        /// 递归处理文件，传入相对路径，例如 unity的 meta 文件
+        /// </summary>
+        /// <param name="path"></param>
+        public static void DeleteTheFileBySuffix(string path="", string thePatternSuffix = "")
+        {
+            if (string.IsNullOrEmpty(path)) path = FolderForDeleteFile;
+            if (string.IsNullOrEmpty(thePatternSuffix)) thePatternSuffix = theSuffixSearchPattern;
+
+            if ( ! Directory.Exists(path)) return;
+
+            string[] files = Directory.GetFiles(path, thePatternSuffix, SearchOption.AllDirectories);
+
+            Console.WriteLine($"FileTool.DeleteTheFileBySuffix, path: {path}, suffix={thePatternSuffix}, files.Length: {files.Length}");
+
+            try
+            {
+                // 获取指定路径下所有文件和子目录中的文件
+                foreach (string file in files)
+                {
+                    // 删除找到的每个.png文件
+                    File.Delete(file);
+                    //Console.WriteLine($"Deleted: {file}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+
+        }
+
+        #endregion ---------------------------删除文件夹下指定后缀的文件----------------------------------------
+
+
+
+
         #region ---------------------------备份路径下的某些符合要求的文件----------------------------------------
 
         /// <summary>
