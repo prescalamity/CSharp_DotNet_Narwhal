@@ -16,6 +16,11 @@ namespace DesignPattern
         private static object locker = new object();
         private static volatile Singleton instance;
 
+
+		public string name = "DesignPattern.Singleton";
+
+
+
         // 构造方法 private 化
         private Singleton()
         {
