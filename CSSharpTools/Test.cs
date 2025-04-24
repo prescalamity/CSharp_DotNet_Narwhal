@@ -19,7 +19,8 @@ namespace CSSharpTools
 
             //FileTool.modifyFileContent();
             //FileTool.CompareFileListFiles();
-            FileTool.DeleteTheFileBySuffix();
+            //FileTool.DeleteTheFileBySuffix();
+            FileTool.GetFileEncodingByPath();
 
             //Stack<int> sta = new Stack<int>();
             //sta.Push(0);

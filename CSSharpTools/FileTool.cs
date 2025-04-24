@@ -10,20 +10,87 @@ namespace CSSharpTools
 {
 	public class FileTool
 	{
+		#region ---------------------------获取 文件夹下的 文件的 编码格式----------------------------------------
+
+
+		public static void GetFileEncodingByPath(string folderPath = "")
+		{
+			folderPath = @"D:\_YZ1_Publish_Game64\Bin\Client\Game_Harmony\Assets\GResources\Lua\LuaScript"; // 请替换为你的文件夹路径
+			folderPath = @"D:\_EncodingFiles"; // 请替换为你的文件夹路径
+
+			int counter = 0;
+			foreach (var file in Directory.GetFiles(folderPath, "*.lua", SearchOption.AllDirectories))
+			{
+
+				//Encoding  encoding = GetFileEncoding( file);
+
+				//if (file.EndsWith(".lua"))
+				//{
+				//	counter++;
+
+				//	string[] bytes = File.ReadAllLines(file);
+				//	File.WriteAllLines(file, bytes, new UTF8Encoding(true));
+				//}
+
+				//Console.WriteLine($"File: {file}, Encoding.EncodingName: {encoding.EncodingName}, " +
+				//	$"Encoding.HeaderName: {encoding.HeaderName}, ");
+				// File: D:\BindPhone\BossGambleMgr.lua, Encoding: System.Text.UTF8Encoding+UTF8EncodingSealed
+
+				bool isBom = IsUtf8WithBom( file);
+				if (!isBom)
+				{
+					Console.WriteLine($"File: {file}, not is Utf8-Bom: {isBom}, ");
+				}
+
+			}
+			Console.WriteLine($"counter: {counter}");
+		}
+
+		static Encoding GetFileEncoding(string filename)
+		{
+			using (var reader = new StreamReader(filename, true))
+			{
+				// 读取一行以使编码能够被识别
+				reader.ReadLine();
+				return reader.CurrentEncoding;
+			}
+		}
+
+
+		static bool IsUtf8WithBom(string filePath)
+		{
+			// UTF-8 BOM 的字节序列
+			byte[] bom = new byte[] { 0xEF, 0xBB, 0xBF };
+
+			// 检查文件的前 3 个字节是否等于 BOM 字节
+			using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+			{
+				byte[] buffer = new byte[3];
+				int bytesRead = fs.Read(buffer, 0, 3);
+				if (bytesRead < 3)
+				{
+					return false; // 文件小于 3 字节，不可能是 UTF-8 BOM
+				}
+
+				return buffer[0] == bom[0] && buffer[1] == bom[1] && buffer[2] == bom[2];
+			}
+		}
+
+		#endregion ---------------------------获取 文件夹下的 文件的 编码格式----------------------------------------
 
 
 
-        #region ---------------------------删除文件夹下指定后缀的文件----------------------------------------
+		#region ---------------------------删除文件夹下指定后缀的文件----------------------------------------
 
-        /// <summary>
-        /// 指定的文件夹
-        /// </summary>
-        public static string FolderForDeleteFile = "D:\\YZ1_Dev_Tuanjie\\Bin\\Client\\Game_Harmony\\Assets\\StreamingAssets\\OpenHarmony\\Data";
+		/// <summary>
+		/// 指定的文件夹
+		/// </summary>
+		public static string FolderForDeleteFile = "D:\\_TuanjieHarmonyProjs\\_Game_Harmony_SDK25\\entry";
 
         /// <summary>
         /// 后缀的匹配模式
         /// </summary>
-        public static string theSuffixSearchPattern = "*.manifest";
+        public static string theSuffixSearchPattern = "*.meta";
 
         /// <summary>
         /// 递归处理文件，传入相对路径，例如 unity的 meta 文件
@@ -38,7 +105,7 @@ namespace CSSharpTools
 
             string[] files = Directory.GetFiles(path, thePatternSuffix, SearchOption.AllDirectories);
 
-            Console.WriteLine($"FileTool.DeleteTheFileBySuffix, path: {path}, suffix={thePatternSuffix}, files.Length: {files.Length}");
+            Console.WriteLine($"FileTool.DeleteTheFileBySuffix, path: {path}, suffix={thePatternSuffix}, files.Length: {files.Length} \n");
 
             try
             {

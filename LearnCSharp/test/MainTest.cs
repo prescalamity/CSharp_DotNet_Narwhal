@@ -15,6 +15,14 @@ using System.Data;
 
 namespace LearnCSharp
 {
+
+    public struct SMsgPayPrize_OpenPay_SC
+    {
+        public UInt32 dwProductId;                      // 商品ID
+        public string szName;                           // 商品名字
+        public string szPayItemID;                      // 内购ID（IOS支付专用）
+    }
+
     /// <summary>
     /// 日志等级，一共8个，共 255个 组合
     /// 1111 1111 = 255
@@ -165,7 +173,8 @@ namespace LearnCSharp
         private uint m_FlagsF;
 
 
-        public Dictionary<string, MyCodeChild> assetBundleCaches= new Dictionary<string, MyCodeChild>();
+        public Dictionary<string, string> assetBundleCaches= new Dictionary<string, string>();
+
         private List<string> m_RemovedKeys=new List<string>();
 
 
@@ -210,16 +219,48 @@ namespace LearnCSharp
         public string M_Rsid { get; internal set; } = "";
 
 
+        public string strExtension=null;                    // 扩展数据( U8获取订单号时，当前渠道SDK的扩展数据。比如渠道有下单操作之后，这个字段里面，就存放了渠道SDK下单返回的数据)
+        public string strSign="";                           // 服务器签名
+
         public void RunThis() {
             Console.WriteLine($"MainTest.RunThis!");
 
-            M_Q1PID = "123456";
+            SMsgPayPrize_OpenPay_SC sMsgPayPrize_OpenPay_SC = new SMsgPayPrize_OpenPay_SC();
+            sMsgPayPrize_OpenPay_SC.szName = "asd";
+            sMsgPayPrize_OpenPay_SC.szPayItemID = "123";
+            sMsgPayPrize_OpenPay_SC.dwProductId = 456;
 
-            Uuid = "7890";
 
 
-            Console.WriteLine($"MainTest.RunThis, M_Q1PID=" + M_Q1PID);
-            Console.WriteLine($"MainTest.RunThis, M_Uuid=" + Uuid);
+            Console.WriteLine($"MainTest.RunThis, sMsgPayPrize_OpenPay_SC={sMsgPayPrize_OpenPay_SC}, " + sMsgPayPrize_OpenPay_SC.szName);
+
+            Console.WriteLine($"MainTest.RunThis, strExtension={strExtension}, strSign={strSign}" );
+
+
+
+            assetBundleCaches.Add("111","qqq");
+            assetBundleCaches.Add("222","www");
+            assetBundleCaches.Add("333","eee");
+            assetBundleCaches.Add("444","rrr");
+            assetBundleCaches.Add("555","ttt");
+
+
+            KeyValuePair<string,string> item1 = assetBundleCaches.First();
+
+            Console.WriteLine($"MainTest.RunThis, assetBundleCaches.Count={assetBundleCaches.Count}, item1={item1.Key}, item1={item1.Value}");
+
+            assetBundleCaches.Remove(item1.Key);
+            KeyValuePair<string, string> item2 = assetBundleCaches.First();
+
+            Console.WriteLine($"MainTest.RunThis, assetBundleCaches.Count={assetBundleCaches.Count}, item1={item2.Key}, item1={item2.Value}");
+
+            //M_Q1PID = "123456";
+
+            //Uuid = "7890";
+
+
+            //Console.WriteLine($"MainTest.RunThis, M_Q1PID=" + M_Q1PID);
+            //Console.WriteLine($"MainTest.RunThis, M_Uuid=" + Uuid);
 
 
 
