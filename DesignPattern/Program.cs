@@ -11,7 +11,13 @@ namespace DesignPattern
         static void Main(string[] args)
         {
 
-        }
+			Console.WriteLine($"Program.Main!");
+
+			Console.WriteLine($"Program.Main, name=" +Singleton.getInstance().name);
+
+
+
+		}
 
     }
 
