@@ -15,7 +15,9 @@ namespace DesignPattern
 
 			Console.WriteLine($"Program.Main, name=" +Singleton.getInstance().name);
 
+			FactoryPattern factoryPattern = new FactoryPattern();
 
+			Console.WriteLine($"Program.Main, name=" + factoryPattern.main());
 
 		}
 

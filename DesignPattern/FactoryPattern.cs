@@ -70,7 +70,7 @@ namespace DesignPattern
 	public class FactoryPattern
 	{
 
-		int main()
+		public int main()
 		{
 			// 使用简单工厂创建产品
 			SimpleFactory factory = new SimpleFactory();
@@ -105,9 +105,13 @@ namespace DesignPattern
 
 
 
-	#region===================================== 抽线复杂工厂 =============================================
+	#region===================================== 抽象复杂工厂 =============================================
+
+	// 生成网页。（抽象类生成）页面标题，（抽象类生成）页面模块（日报，搜索引擎），（抽象类生成）链接（人们日报，光明日志，雅虎，谷歌，微软）
+	// 一个工厂只能生成一种（抽象类生成）页面模块，（抽象类生成）链接，不同的工厂有不同的（抽象类生成）页面模块，（抽象类生成）链接
 
 	// 华为手机和电脑
+
 	// 场景描述：我联系了一家中国工厂，品尝该厂的苹果和香蕉，吃完后又找到一家美国工厂，品尝他家的苹果和香蕉，对比下口感。
 
 	// 抽象产品A 
@@ -187,9 +191,9 @@ namespace DesignPattern
 	}
 
 	// 具体工厂2，只能产生A族中的一个产品，和B族中的一个产品，例如：美国厂商生产的苹果和香蕉，口感和价格
-	class ConcreteFactory2 :  AbstractFactory
+	class ConcreteFactory2 : AbstractFactory
 	{
-		public override AbstractProductA createProductA() 
+		public override AbstractProductA createProductA()
 		{
 			//return new ConcreteProductA1();
 			return new ConcreteProductA2();
@@ -214,9 +218,9 @@ namespace DesignPattern
 			productB1.eat();
 
 			// 使用具体工厂2创建产品族2
-			AbstractFactory factory2 = new ConcreteFactory2();			// 中国工厂
+			AbstractFactory factory2 = new ConcreteFactory2();           // 中国工厂
 			AbstractProductA productA2 = factory2.createProductA();
-			AbstractProductB productB2 = factory2.createProductB();     
+			AbstractProductB productB2 = factory2.createProductB();
 
 			productA2.use();
 			productB2.eat();
@@ -228,11 +232,13 @@ namespace DesignPattern
 
 
 
-	// ------------------------------------------- 案例 二 ---------------------------------------------------
+	// ------------------------------------------- 案例 二 图形 形状和颜色---------------------------------------------------
 
 
 
-
+	/// <summary>
+	/// 形状接口
+	/// </summary>
 	public interface Shape
 	{
 		void draw();
@@ -264,7 +270,7 @@ namespace DesignPattern
 
 
 	/// <summary>
-	/// 接口
+	/// 颜色接口
 	/// </summary>
 	public interface Color
 	{
@@ -296,76 +302,123 @@ namespace DesignPattern
 	}
 
 	/// <summary>
-	/// 抽象类
+	/// 具体图像
+	/// </summary>
+	public interface Picture
+	{
+		void OutputPicture();
+	}
+
+	/// <summary>
+	/// 具体图像
+	/// </summary>
+	public interface SunPicture : Picture
+	{
+		void OutputPicture();
+	}
+
+
+
+
+	/// <summary>
+	/// 抽象类，需要生产形状和颜色
 	/// </summary>
 	public abstract class AbstractFactory2
 	{
 		public abstract Color getColor(string color);
 		public abstract Shape getShape(string shape);
+		public abstract Picture OutputPicture();
 	}
 
 
-	public class ShapeFactory : AbstractFactory2
+	//public class ShapeFactory : AbstractFactory2
+	//{
+	//	public override Color getColor(string color)
+	//	{
+	//		return null;
+	//	}
+
+	//	public override Shape getShape(string shapeType)
+	//	{
+	//		if (shapeType == null)
+	//		{
+	//			return null;
+	//		}
+	//		if (shapeType.Equals ("CIRCLE"))
+	//		{
+	//			return new Circle();
+	//		}
+	//		else if (shapeType.Equals("RECTANGLE"))
+	//		{
+	//			return new Rectangle();
+	//		}
+	//		else if (shapeType.Equals("SQUARE"))
+	//		{
+	//			return new Square();
+	//		}
+	//		return null;
+	//	}
+
+	//	public override Picture OutputPicture()
+	//	{
+	//		throw new NotImplementedException();
+	//	}
+	//}
+
+	//public class ColorFactory : AbstractFactory2
+	//{
+	//	public override Color getColor(string color)
+	//	{
+	//		if (color == null)
+	//		{
+	//			return null;
+	//		}
+	//		if (color.Equals("RED"))
+	//		{
+	//			return new Red();
+	//		}
+	//		else if (color.Equals("GREEN"))
+	//		{
+	//			return new Green();
+	//		}
+	//		else if (color.Equals("BLUE"))
+	//		{
+	//			return new Blue();
+	//		}
+	//		return null;
+	//	}
+
+	//	public override Shape getShape(string shapeType)
+	//	{
+	//		return null;
+	//	}
+
+	//	public override Picture OutputPicture()
+	//	{
+	//		throw new NotImplementedException();
+	//	}
+	//}
+
+	public class PictureFactory : AbstractFactory2
 	{
 		public override Color getColor(string color)
 		{
-			return null;
+			throw new NotImplementedException();
 		}
 
-		public override Shape getShape(string shapeType)
+		public override Shape getShape(string shape)
 		{
-			if (shapeType == null)
-			{
-				return null;
-			}
-			if (shapeType.Equals ("CIRCLE"))
-			{
-				return new Circle();
-			}
-			else if (shapeType.Equals("RECTANGLE"))
-			{
-				return new Rectangle();
-			}
-			else if (shapeType.Equals("SQUARE"))
-			{
-				return new Square();
-			}
-			return null;
+			throw new NotImplementedException();
 		}
 
-
+		public override Picture OutputPicture()
+		{
+			throw new NotImplementedException();
+		}
 	}
 
-	public class ColorFactory : AbstractFactory2
-	{
-		public override Color getColor(string color)
-		{
-			if (color == null)
-			{
-				return null;
-			}
-			if (color.Equals("RED"))
-			{
-				return new Red();
-			}
-			else if (color.Equals("GREEN"))
-			{
-				return new Green();
-			}
-			else if (color.Equals("BLUE"))
-			{
-				return new Blue();
-			}
-			return null;
-		}
-
-		public override Shape getShape(string shapeType)
-		{
-			return null;
-		}
 
 
-	}
 
 	/// <summary>
 	/// 创建一个工厂创造器/生成器类，通过传递形状或颜色信息来获取工厂。
@@ -374,14 +427,18 @@ namespace DesignPattern
 	{
 		public static AbstractFactory2 getFactory(string choice)
 		{
-			if (choice.Equals("SHAPE"))
+			if (choice.Equals("PictureFactory"))
 			{
-				return new ShapeFactory();
+				return new PictureFactory();
 			}
-			else if (choice.Equals("COLOR"))
-			{
-				return new ColorFactory();
-			}
+			//else if(choice.Equals("SHAPE"))
+			//{
+			//	return new ShapeFactory();
+			//}
+			//else if (choice.Equals("COLOR"))
+			//{
+			//	return new ColorFactory();
+			//}
 			return null;
 		}
 	}
@@ -395,51 +452,15 @@ namespace DesignPattern
 		{
 
 			//获取形状工厂
-			AbstractFactory2 shapeFactory = FactoryProducer.getFactory("SHAPE");
+			AbstractFactory2 shapeFactory = FactoryProducer.getFactory("PictureFactory");
 
-			//获取形状为 Circle 的对象
-			Shape shape1 = shapeFactory.getShape("CIRCLE");
+			shapeFactory.OutputPicture();
 
-			//调用 Circle 的 draw 方法
-			shape1.draw();
-
-			//获取形状为 Rectangle 的对象
-			Shape shape2 = shapeFactory.getShape("RECTANGLE");
-
-			//调用 Rectangle 的 draw 方法
-			shape2.draw();
-
-			//获取形状为 Square 的对象
-			Shape shape3 = shapeFactory.getShape("SQUARE");
-
-			//调用 Square 的 draw 方法
-			shape3.draw();
-
-			//获取颜色工厂
-			AbstractFactory2 colorFactory = FactoryProducer.getFactory("COLOR");
-
-			//获取颜色为 Red 的对象
-			Color color1 = colorFactory.getColor("RED");
-
-			//调用 Red 的 fill 方法
-			color1.fill();
-
-			//获取颜色为 Green 的对象
-			Color color2 = colorFactory.getColor("GREEN");
-
-			//调用 Green 的 fill 方法
-			color2.fill();
-
-			//获取颜色为 Blue 的对象
-			Color color3 = colorFactory.getColor("BLUE");
-
-			//调用 Blue 的 fill 方法
-			color3.fill();
 		}
 	}
 
 
-	#endregion===================================== 抽线复杂工厂 =============================================
+	#endregion===================================== 抽象复杂工厂 =============================================
 
 
 
