@@ -341,11 +341,47 @@ namespace CSSharpTools
 
         }
 
-        #endregion ---------------------按规则修改指定文件中的内容---------------------------------------------
+		#endregion ---------------------按规则修改指定文件中的内容---------------------------------------------
 
 
 
-    }
+
+		#region ---------------------------将指定文件从原文件夹覆盖到目标文件夹----------------------------------------
+
+
+		//D:/lins.log		Assets/Artist/GResources/UI/Skill/skill_icon_jineng_FB_zyxb.png.meta
+		//D:/_YZ1_Publish_Game64/Bin/Client/Game/
+		//D:/YZ1_Dev_2022/Game_64/Bin/Client/Game/
+
+		public static void copyFilesToTargetFloder(string fileList, string path1, string path2) 
+		{
+
+			Console.WriteLine("FileTool.copyFilesToTargetFloder, 将指定文件从原文件夹覆盖到目标文件夹");
+
+			string[] files1 = File.ReadAllLines(fileList);
+
+			foreach (string file in files1) 
+			{ 
+				string filePath = Path.Combine(path1, file);
+				string filePath2= Path.Combine(path2, file);
+				if (File.Exists(filePath) && File.Exists(filePath2))
+				{
+					File.Copy(filePath, filePath2, true);
+				}
+				else {
+					Console.WriteLine($"FileTool.copyFilesToTargetFloder, 文件不存在, \n {filePath} \n {filePath2}");
+
+				}
+			}
+
+		}
+
+
+		#endregion---------------------------将指定文件从原文件夹覆盖到目标文件夹----------------------------------------
+
+
+
+	}
 
 
 

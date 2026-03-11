@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using static System.Net.Mime.MediaTypeNames;
 using LitJson;
 using System.Data;
+using System.IO;
 
 namespace LearnCSharp
 {
@@ -225,331 +226,362 @@ namespace LearnCSharp
         public void RunThis() {
             Console.WriteLine($"MainTest.RunThis!");
 
-            SMsgPayPrize_OpenPay_SC sMsgPayPrize_OpenPay_SC = new SMsgPayPrize_OpenPay_SC();
-            sMsgPayPrize_OpenPay_SC.szName = "asd";
-            sMsgPayPrize_OpenPay_SC.szPayItemID = "123";
-            sMsgPayPrize_OpenPay_SC.dwProductId = 456;
+			bool dasda = true;
 
+			string dasd = dasda.ToString();
+			bool dasddasd = dasd == "True";
+			bool dasddasd1 = dasd == "true";
+			Console.WriteLine($"MainTest.RunThis, boolToString = {dasda} , dasddasd = {dasddasd}, dasddasd1 = {dasddasd1}");
 
+			Console.WriteLine(string.Format("GameSDK::ReqVerify, m_userInfo.token = {0}, m_userInfo.isHarmonySDK = {1}, m_userInfo.timestamp = {2}, m_userInfo.timestamp = {3}, m_userInfo.timestamp = {4},",
+0, 1, 2, 3, 4));
 
-            Console.WriteLine($"MainTest.RunThis, sMsgPayPrize_OpenPay_SC={sMsgPayPrize_OpenPay_SC}, " + sMsgPayPrize_OpenPay_SC.szName);
 
-            Console.WriteLine($"MainTest.RunThis, strExtension={strExtension}, strSign={strSign}" );
+			GetTheName getTheName = new GetTheName();  //  对父类实例化
+			Console.WriteLine(getTheName.ReWrite_Get()); // 调用父类虚方法
+			Console.WriteLine(getTheName.Cover_Get());  // 调用父类实方法
 
+			GetTheName rewrite = new Rewrite(); // 用子类创建父类对象
+			Console.WriteLine(rewrite.ReWrite_Get());
 
+			GetTheName ovverides = new Cover(); // 用子类创建父类对象
+			Console.WriteLine(ovverides.Cover_Get());
 
-            assetBundleCaches.Add("111","qqq");
-            assetBundleCaches.Add("222","www");
-            assetBundleCaches.Add("333","eee");
-            assetBundleCaches.Add("444","rrr");
-            assetBundleCaches.Add("555","ttt");
+			Cover ovveridesC = new Cover(); // 用子类创建父类对象
+			Console.WriteLine(ovveridesC.Cover_Get());
 
+			IGetTheName ovveridesI = new Cover(); // 用子类创建父类对象
+			Console.WriteLine(ovveridesI.Cover_Get());
 
-            KeyValuePair<string,string> item1 = assetBundleCaches.First();
+			//string path = Directory.GetCurrentDirectory();
+			//bool isFileExists = File.Exists("/lgyTest.txt");
+			//Console.WriteLine($"MainTest.RunThis, path = {path}, isFileExists = {isFileExists},");
 
-            Console.WriteLine($"MainTest.RunThis, assetBundleCaches.Count={assetBundleCaches.Count}, item1={item1.Key}, item1={item1.Value}");
+			//SMsgPayPrize_OpenPay_SC sMsgPayPrize_OpenPay_SC = new SMsgPayPrize_OpenPay_SC();
+			//sMsgPayPrize_OpenPay_SC.szName = "asd";
+			//sMsgPayPrize_OpenPay_SC.szPayItemID = "123";
+			//sMsgPayPrize_OpenPay_SC.dwProductId = 456;
 
-            assetBundleCaches.Remove(item1.Key);
-            KeyValuePair<string, string> item2 = assetBundleCaches.First();
 
-            Console.WriteLine($"MainTest.RunThis, assetBundleCaches.Count={assetBundleCaches.Count}, item1={item2.Key}, item1={item2.Value}");
 
-            //M_Q1PID = "123456";
+			//Console.WriteLine($"MainTest.RunThis, sMsgPayPrize_OpenPay_SC={sMsgPayPrize_OpenPay_SC}, " + sMsgPayPrize_OpenPay_SC.szName);
 
-            //Uuid = "7890";
+			//Console.WriteLine($"MainTest.RunThis, strExtension={strExtension}, strSign={strSign}" );
 
 
-            //Console.WriteLine($"MainTest.RunThis, M_Q1PID=" + M_Q1PID);
-            //Console.WriteLine($"MainTest.RunThis, M_Uuid=" + Uuid);
 
+			//assetBundleCaches.Add("111","qqq");
+			//assetBundleCaches.Add("222","www");
+			//assetBundleCaches.Add("333","eee");
+			//assetBundleCaches.Add("444","rrr");
+			//assetBundleCaches.Add("555","ttt");
 
 
-            //int ipp = 0;
-            //Console.WriteLine($"MainTest.RunThis! ipp++ = {ipp++}");
-            //Console.WriteLine($"MainTest.RunThis! ++ipp = {++ipp}");
+			//KeyValuePair<string,string> item1 = assetBundleCaches.First();
 
-            //JsonData m_JsonData = new JsonData();
+			//Console.WriteLine($"MainTest.RunThis, assetBundleCaches.Count={assetBundleCaches.Count}, item1={item1.Key}, item1={item1.Value}");
 
-            //m_JsonData["GameID"] = 1;
-            //m_JsonData["ServerID"] = 2;
-            //m_JsonData["UserID"] = 3;
-            //m_JsonData["PayNum"] = 4;
-            //Console.WriteLine($"MainTest.RunThis! m_JsonData = {m_JsonData.ToJson()}");
+			//assetBundleCaches.Remove(item1.Key);
+			//KeyValuePair<string, string> item2 = assetBundleCaches.First();
 
-            ////m_JsonData.Clear();
-            //m_JsonData["OrderItem"] = 5;
-            //m_JsonData["OrderNo"] = 6;
-            //m_JsonData["OrderSign"] = 7;
-            //m_JsonData["currencyType"] = 8;
-            //Console.WriteLine($"MainTest.RunThis! m_JsonData = {m_JsonData.ToJson()}");
+			//Console.WriteLine($"MainTest.RunThis, assetBundleCaches.Count={assetBundleCaches.Count}, item1={item2.Key}, item1={item2.Value}");
 
+			//M_Q1PID = "123456";
 
-            //m_JsonData.Clear();
-            //m_JsonData["platform"] = 9;
-            //m_JsonData["eventKind"] = 10;
-            //m_JsonData["datas"] = JsonMapper.ToJson(new int[]{11,12,13});
-            //Console.WriteLine($"MainTest.RunThis! m_JsonData = {m_JsonData.ToJson()}");
+			//Uuid = "7890";
 
-            //foreach (var item in basicDependAssetBundleSet)
-            //{
-            //    Console.WriteLine($"MainTest.RunThis! item = {item}");
-            //}
 
-            //for (int i = 0; i < 30000; i++)
-            //{
-            //    m_DependencyMap.Add("m_DependencyMap"+i, new HashSet<string>());
-            //    m_ExtDependencyMap.Add("m_ExtDependencyMap" + i, new HashSet<string>());
-            //}
+			//Console.WriteLine($"MainTest.RunThis, M_Q1PID=" + M_Q1PID);
+			//Console.WriteLine($"MainTest.RunThis, M_Uuid=" + Uuid);
 
-            //long resCounter = 0;
 
-            //long flag1 = DateTime.UtcNow.Ticks;
-            //for (int i = 0; i < 30000; i++)
-            //{
-            //    m_DependencyMap.TryGetValue("m_DependencyMap1000", out basicDependAssetBundleSet);
 
-            //    m_ExtDependencyMap.TryGetValue("m_ExtDependencyMap1000", out extDependAssetBundleSet);
+			//int ipp = 0;
+			//Console.WriteLine($"MainTest.RunThis! ipp++ = {ipp++}");
+			//Console.WriteLine($"MainTest.RunThis! ++ipp = {++ipp}");
 
-            //    if (basicDependAssetBundleSet != null)
-            //    {
-            //        resCounter ++;
-            //    }
-            //}
-            //long flag2 = DateTime.UtcNow.Ticks;
+			//JsonData m_JsonData = new JsonData();
 
-            //Console.WriteLine($"MainTest.RunThis! resCounter={resCounter}, res1 - res2 = {flag2 - flag1}");
-            ////MainTest.RunThis!  res1 - res2=9991,
-            ////MainTest.RunThis! resCounter=30000, res1 - res2 = 10569
-            //// 一次 m_DependencyMap.TryGetValue 操作需要 33 ns
+			//m_JsonData["GameID"] = 1;
+			//m_JsonData["ServerID"] = 2;
+			//m_JsonData["UserID"] = 3;
+			//m_JsonData["PayNum"] = 4;
+			//Console.WriteLine($"MainTest.RunThis! m_JsonData = {m_JsonData.ToJson()}");
 
-            //Int64 res1 = (m_iCurrentHP - 1) % m_UnitBlood;  // 1138506000 - 1
+			////m_JsonData.Clear();
+			//m_JsonData["OrderItem"] = 5;
+			//m_JsonData["OrderNo"] = 6;
+			//m_JsonData["OrderSign"] = 7;
+			//m_JsonData["currencyType"] = 8;
+			//Console.WriteLine($"MainTest.RunThis! m_JsonData = {m_JsonData.ToJson()}");
 
-            //Int64 res2 = (m_iCurrentHP - 1) % m_UnitBlood + 1;
 
-            //float m_fPercent = ((m_iCurrentHP - 1) % m_UnitBlood + 1) * 1.0f / m_UnitBlood;
+			//m_JsonData.Clear();
+			//m_JsonData["platform"] = 9;
+			//m_JsonData["eventKind"] = 10;
+			//m_JsonData["datas"] = JsonMapper.ToJson(new int[]{11,12,13});
+			//Console.WriteLine($"MainTest.RunThis! m_JsonData = {m_JsonData.ToJson()}");
 
-            //Console.WriteLine($"MainTest.RunThis!  res1={res1}, res2={res2}, m_fPercent={m_fPercent}, ");
+			//foreach (var item in basicDependAssetBundleSet)
+			//{
+			//    Console.WriteLine($"MainTest.RunThis! item = {item}");
+			//}
 
-            //string text = @"喜从天降！<color=""#8888888"">恭喜玩家<color='#289D32FF'>香辣五花肉</color>获得大奖<a href='client::Tips(49055,1,0,1,9131,12131,16131,0,0,0,2,0,0,0,0,0,0)' class=""c4"">阵眼启灵自选宝箱</a>*1，人品爆棚！";
+			//for (int i = 0; i < 30000; i++)
+			//{
+			//    m_DependencyMap.Add("m_DependencyMap"+i, new HashSet<string>());
+			//    m_ExtDependencyMap.Add("m_ExtDependencyMap" + i, new HashSet<string>());
+			//}
 
-            //string reg = @"\<color=.+?\>";
+			//long resCounter = 0;
 
+			//long flag1 = DateTime.UtcNow.Ticks;
+			//for (int i = 0; i < 30000; i++)
+			//{
+			//    m_DependencyMap.TryGetValue("m_DependencyMap1000", out basicDependAssetBundleSet);
 
-            //MatchCollection matches = Regex.Matches(text, reg);
-            //foreach (Match match in matches)
-            //{
-            //    Console.WriteLine("MainTest.RunThis, match=" + match.Value);
+			//    m_ExtDependencyMap.TryGetValue("m_ExtDependencyMap1000", out extDependAssetBundleSet);
 
-            //    string tempNew = match.Value.Replace("'", string.Empty);
-            //    tempNew = tempNew.Replace("\"", string.Empty);
+			//    if (basicDependAssetBundleSet != null)
+			//    {
+			//        resCounter ++;
+			//    }
+			//}
+			//long flag2 = DateTime.UtcNow.Ticks;
 
-            //    text = text.Replace(match.Value, tempNew);
-            //}
+			//Console.WriteLine($"MainTest.RunThis! resCounter={resCounter}, res1 - res2 = {flag2 - flag1}");
+			////MainTest.RunThis!  res1 - res2=9991,
+			////MainTest.RunThis! resCounter=30000, res1 - res2 = 10569
+			//// 一次 m_DependencyMap.TryGetValue 操作需要 33 ns
 
-            //Console.WriteLine("MainTest.RunThis, text=" + text);
+			//Int64 res1 = (m_iCurrentHP - 1) % m_UnitBlood;  // 1138506000 - 1
 
+			//Int64 res2 = (m_iCurrentHP - 1) % m_UnitBlood + 1;
 
-            //TMP_TextProcessingStack<string> asdStr = new  TMP_TextProcessingStack<string> ();
+			//float m_fPercent = ((m_iCurrentHP - 1) % m_UnitBlood + 1) * 1.0f / m_UnitBlood;
 
-            //int dasdas;
-            //float dasd;
+			//Console.WriteLine($"MainTest.RunThis!  res1={res1}, res2={res2}, m_fPercent={m_fPercent}, ");
 
+			//string text = @"喜从天降！<color=""#8888888"">恭喜玩家<color='#289D32FF'>香辣五花肉</color>获得大奖<a href='client::Tips(49055,1,0,1,9131,12131,16131,0,0,0,2,0,0,0,0,0,0)' class=""c4"">阵眼启灵自选宝箱</a>*1，人品爆棚！";
 
+			//string reg = @"\<color=.+?\>";
 
-            //if (asdStr.itemStack == null)
-            //{
-            //    dasdas = 1;
-            //    Console.WriteLine($"MainTest.RunThis, asdStr.itemStack is null.");
-            //}
-            //else
-            //{
-            //    dasd = 1;
-            //    Console.WriteLine($"MainTest.RunThis, asdStr.itemStack not null");
-            //}
 
+			//MatchCollection matches = Regex.Matches(text, reg);
+			//foreach (Match match in matches)
+			//{
+			//    Console.WriteLine("MainTest.RunThis, match=" + match.Value);
 
+			//    string tempNew = match.Value.Replace("'", string.Empty);
+			//    tempNew = tempNew.Replace("\"", string.Empty);
 
+			//    text = text.Replace(match.Value, tempNew);
+			//}
 
-            //TMP_TextProcessingStack<string> asdStr1 = null;
+			//Console.WriteLine("MainTest.RunThis, text=" + text);
 
 
-            //Point s = new Point();
-            //Point ss = new Point(100, 101);
-            //Point sss = new Point() { X = 102, Y = 103 };
+			//TMP_TextProcessingStack<string> asdStr = new  TMP_TextProcessingStack<string> ();
 
-            //Rectangle q = new Rectangle() { Width = 100, Height = 101};
+			//int dasdas;
+			//float dasd;
 
-            //Rectangle rectangle =null;
 
-            //if (rectangle == null || rectangle.myCodeChild == null)
-            //{
-            //    Console.WriteLine("MainTest.RunThis!, rectangle==null || rectangle.myCodeChild == null");
-            //}
-            //else
-            //{
-            //    Console.WriteLine("MainTest.RunThis!, dasdas=" + rectangle.myCodeChild.myCodeChildFunc());
-            //}
 
-            //uint m_Flags = (int)EntityFlags.flagDrawName | (int)EntityFlags.flagVisible | (int)EntityFlags.flagSelectable;// | (int)EntityFlags.flagDrawHP默认不可显示血量/
-            //m_FlagsF = (int)EntityFlags.flagDrawName | (int)EntityFlags.flagVisible | (int)EntityFlags.flagSelectable;// | (int)EntityFlags.flagDrawHP默认不可显示血量/
+			//if (asdStr.itemStack == null)
+			//{
+			//    dasdas = 1;
+			//    Console.WriteLine($"MainTest.RunThis, asdStr.itemStack is null.");
+			//}
+			//else
+			//{
+			//    dasd = 1;
+			//    Console.WriteLine($"MainTest.RunThis, asdStr.itemStack not null");
+			//}
 
-            //Console.WriteLine("MainTest.RunThis, m_Flags visible=" + m_Flags+ ", m_FlagsF="+ m_FlagsF);
 
-            //Console.WriteLine("MainTest.RunThis, EntityFlags.flagDrawName=" + (uint)EntityFlags.flagDrawName);
 
-            //int ilgy = 1;
-            //int jlgy = 8;
 
-            //jlgy |= ilgy;
+			//TMP_TextProcessingStack<string> asdStr1 = null;
 
-            //int klgy = jlgy;
 
-            //Console.WriteLine("MainTest.RunThis, klgy visible=" + klgy);
+			//Point s = new Point();
+			//Point ss = new Point(100, 101);
+			//Point sss = new Point() { X = 102, Y = 103 };
 
-            //string dad = "武道巅峰--3v3新赛季开.";
+			//Rectangle q = new Rectangle() { Width = 100, Height = 101};
 
-            //byte[] szTopic = Encoding.UTF8.GetBytes(dad);
+			//Rectangle rectangle =null;
 
-            //string tempNumStr = "";
-            //for (int j = 0; j < szTopic.Length; j++)
-            //{
-            //    tempNumStr += ((int)szTopic[j]).ToString() + " ";
-            //}
-            //Console.WriteLine($"MainTest.RunThis, Length={szTopic.Length}, tempNumStr={tempNumStr}, dad={dad}");
+			//if (rectangle == null || rectangle.myCodeChild == null)
+			//{
+			//    Console.WriteLine("MainTest.RunThis!, rectangle==null || rectangle.myCodeChild == null");
+			//}
+			//else
+			//{
+			//    Console.WriteLine("MainTest.RunThis!, dasdas=" + rectangle.myCodeChild.myCodeChildFunc());
+			//}
 
-            //int dasd = 100;
+			//uint m_Flags = (int)EntityFlags.flagDrawName | (int)EntityFlags.flagVisible | (int)EntityFlags.flagSelectable;// | (int)EntityFlags.flagDrawHP默认不可显示血量/
+			//m_FlagsF = (int)EntityFlags.flagDrawName | (int)EntityFlags.flagVisible | (int)EntityFlags.flagSelectable;// | (int)EntityFlags.flagDrawHP默认不可显示血量/
 
-            //float dda = dasd;
+			//Console.WriteLine("MainTest.RunThis, m_Flags visible=" + m_Flags+ ", m_FlagsF="+ m_FlagsF);
 
+			//Console.WriteLine("MainTest.RunThis, EntityFlags.flagDrawName=" + (uint)EntityFlags.flagDrawName);
 
-            //            string ddasdJson = @"
-            //[
-            //	{	""display_name"":""Tales of the Electric Romeo - Immediate Music.mp3"",
-            //		""file_path"":""PresetBGM0.mp3"",
-            //		""duration_second"":""130""
-            //	},
-            //	{	""display_name"":""金达莱花.mp3"",
-            //		""file_path"":""PresetBGM1.mp3"",
-            //		""duration_second"":""149""
-            //	},
-            //	{	""display_name"":""孙浩雨 - 像男人一样去战斗(DJ小鱼儿 Remix) - YT_Official.mp3"",
-            //		""file_path"":""PresetBGM2.mp3"",
-            //		""duration_second"":""170""
-            //	},
-            //	{	""display_name"":""孙浩雨 - 生命之枪.mp3"",
-            //		""file_path"":""PresetBGM3.mp3"",
-            //		""duration_second"":""362""
-            //	}
-            //]
-            //";
+			//int ilgy = 1;
+			//int jlgy = 8;
 
-            //            JSONNode jsonNode = JSON.Parse(ddasdJson);
+			//jlgy |= ilgy;
 
-            //            for (int i = 0; i < jsonNode.Count; i++)
-            //            {
-            //                RTBGMInfo rTBGMInfo = new RTBGMInfo();
+			//int klgy = jlgy;
 
-            //                rTBGMInfo.szDisplayName = jsonNode[i]["display_name"].ToString();
-            //                rTBGMInfo.szFilePath = jsonNode[i]["file_path"].ToString();
-            //                rTBGMInfo.nDuration = int.Parse(jsonNode[i]["duration_second"].ToString());
+			//Console.WriteLine("MainTest.RunThis, klgy visible=" + klgy);
 
-            //                m_strBgmFileList.Add(rTBGMInfo);
+			//string dad = "武道巅峰--3v3新赛季开.";
 
-            //            }
+			//byte[] szTopic = Encoding.UTF8.GetBytes(dad);
 
-            //            Console.WriteLine($"dda={dda}, CVoiceChatClient.OnResponse, m_strBgmFileList.Count={m_strBgmFileList.Count}");
-            //            Console.WriteLine($"CVoiceChatClient.OnResponse, m_strBgmFileList.1.szDisplayName={m_strBgmFileList[1].szDisplayName}");
+			//string tempNumStr = "";
+			//for (int j = 0; j < szTopic.Length; j++)
+			//{
+			//    tempNumStr += ((int)szTopic[j]).ToString() + " ";
+			//}
+			//Console.WriteLine($"MainTest.RunThis, Length={szTopic.Length}, tempNumStr={tempNumStr}, dad={dad}");
 
+			//int dasd = 100;
 
-            //string data = "dsadssdasdcxzvzxlvsdjirnurgnbvuefdwuejdfnjsdfneiujqiejiewmfksdnfsjkdnfdfdsfsdfwefwfvsvxcbxcbdsfrgsdgfs";
+			//float dda = dasd;
 
-            //Console.WriteLine($"BillboardList.OnGetData, v0, data.Length={data.Length}, data 50--->{data.Substring(0, data.Length > 50 ? 50 : data.Length)}");
 
+			//            string ddasdJson = @"
+			//[
+			//	{	""display_name"":""Tales of the Electric Romeo - Immediate Music.mp3"",
+			//		""file_path"":""PresetBGM0.mp3"",
+			//		""duration_second"":""130""
+			//	},
+			//	{	""display_name"":""金达莱花.mp3"",
+			//		""file_path"":""PresetBGM1.mp3"",
+			//		""duration_second"":""149""
+			//	},
+			//	{	""display_name"":""孙浩雨 - 像男人一样去战斗(DJ小鱼儿 Remix) - YT_Official.mp3"",
+			//		""file_path"":""PresetBGM2.mp3"",
+			//		""duration_second"":""170""
+			//	},
+			//	{	""display_name"":""孙浩雨 - 生命之枪.mp3"",
+			//		""file_path"":""PresetBGM3.mp3"",
+			//		""duration_second"":""362""
+			//	}
+			//]
+			//";
 
-            //string filename = "wxfile//user/xxx.mp3";
-            //string fileName = filename.Substring(filename.LastIndexOf("/")+1);
-            //Console.WriteLine($"BillboardList.OnGetData, v0, fileName={fileName}, ");
+			//            JSONNode jsonNode = JSON.Parse(ddasdJson);
 
+			//            for (int i = 0; i < jsonNode.Count; i++)
+			//            {
+			//                RTBGMInfo rTBGMInfo = new RTBGMInfo();
 
-            //m_PlaybackFileID.Add( "aaa" );
-            //m_PlaybackFileID.Add( "bbb" );
-            //m_PlaybackFileID.Add( "ccc" );
+			//                rTBGMInfo.szDisplayName = jsonNode[i]["display_name"].ToString();
+			//                rTBGMInfo.szFilePath = jsonNode[i]["file_path"].ToString();
+			//                rTBGMInfo.nDuration = int.Parse(jsonNode[i]["duration_second"].ToString());
 
+			//                m_strBgmFileList.Add(rTBGMInfo);
 
-            //Console.WriteLine($"MainTest.RunThis, 1, m_PlaybackFileID.Length={m_PlaybackFileID.Count}");
+			//            }
 
-            //m_PlaybackFileID.Remove("aaa");
+			//            Console.WriteLine($"dda={dda}, CVoiceChatClient.OnResponse, m_strBgmFileList.Count={m_strBgmFileList.Count}");
+			//            Console.WriteLine($"CVoiceChatClient.OnResponse, m_strBgmFileList.1.szDisplayName={m_strBgmFileList[1].szDisplayName}");
 
-            //Console.WriteLine($"MainTest.RunThis, 2, m_PlaybackFileID.Length={m_PlaybackFileID.Count}");
 
+			//string data = "dsadssdasdcxzvzxlvsdjirnurgnbvuefdwuejdfnjsdfneiujqiejiewmfksdnfsjkdnfdfdsfsdfwefwfvsvxcbxcbdsfrgsdgfs";
 
-            //MyCodeChild.funcLgy();
+			//Console.WriteLine($"BillboardList.OnGetData, v0, data.Length={data.Length}, data 50--->{data.Substring(0, data.Length > 50 ? 50 : data.Length)}");
 
 
-            //bool dasdBool = true;
+			//string filename = "wxfile//user/xxx.mp3";
+			//string fileName = filename.Substring(filename.LastIndexOf("/")+1);
+			//Console.WriteLine($"BillboardList.OnGetData, v0, fileName={fileName}, ");
 
 
-            //Console.WriteLine($"BillboardList.OnGetData, ------- dasdBool={dasdBool} -------------------------\n");
+			//m_PlaybackFileID.Add( "aaa" );
+			//m_PlaybackFileID.Add( "bbb" );
+			//m_PlaybackFileID.Add( "ccc" );
 
 
-            //LogController testEnum = (LogController)dasd;
+			//Console.WriteLine($"MainTest.RunThis, 1, m_PlaybackFileID.Length={m_PlaybackFileID.Count}");
 
-            //LogController testEnum1 = LogController.First;
+			//m_PlaybackFileID.Remove("aaa");
 
-            //if (testEnum == testEnum1)
-            //{
-            //    Console.WriteLine($"BillboardList.OnGetData, ------- testEnum={testEnum} -----true--------------------\n");
-            //}
-            //else
-            //{
-            //    Console.WriteLine($"BillboardList.OnGetData, ------- testEnum={testEnum} -----false--------------------\n");
-            //}
+			//Console.WriteLine($"MainTest.RunThis, 2, m_PlaybackFileID.Length={m_PlaybackFileID.Count}");
 
-            //string das= nameof( LogController.PersonDebug);
 
-            //Console.WriteLine($"------- das={das} ----------\n");
+			//MyCodeChild.funcLgy();
 
 
-            //var dsad = new MyCode[3];
-            //Console.WriteLine($"MainTest.RunThis, --------dsad type={dsad.GetType()==typeof(MyCode[])}");
+			//bool dasdBool = true;
 
-            //if (dsad.GetType() == typeof(MyCode[]))
-            //{
 
-            //}
-            //if (dsad.GetType().BaseType == typeof(Array)) { 
-            //    Console.WriteLine($"MainTest.RunThis, --------dsad type=true lgy");
-            //    int counter = 0;
-            //    foreach(var i in dsad)
-            //    {
-            //        Console.WriteLine(counter++); 
-            //    } 
-            //}
-            //else
-            //{
+			//Console.WriteLine($"BillboardList.OnGetData, ------- dasdBool={dasdBool} -------------------------\n");
 
-            //    Console.WriteLine($"MainTest.RunThis, --------dsad type=false lgy");
-            //}
 
+			//LogController testEnum = (LogController)dasd;
 
+			//LogController testEnum1 = LogController.First;
 
+			//if (testEnum == testEnum1)
+			//{
+			//    Console.WriteLine($"BillboardList.OnGetData, ------- testEnum={testEnum} -----true--------------------\n");
+			//}
+			//else
+			//{
+			//    Console.WriteLine($"BillboardList.OnGetData, ------- testEnum={testEnum} -----false--------------------\n");
+			//}
 
+			//string das= nameof( LogController.PersonDebug);
 
-            //UnitTest1 unitTest1 = new UnitTest1();
+			//Console.WriteLine($"------- das={das} ----------\n");
 
-            //unitTest1.TestMethod1();
-            //unitTest1.TestMethod2();
-            //unitTest1.TestMethod3();
-            //unitTest1.TestMethod4();
 
+			//var dsad = new MyCode[3];
+			//Console.WriteLine($"MainTest.RunThis, --------dsad type={dsad.GetType()==typeof(MyCode[])}");
 
-            // 测试命名空间继承关系
-            //TestExtensionMethods testExtensionMethods = new TestExtensionMethods();
-            //string das = testExtensionMethods.GetName();
-            //testExtensionMethods.RunThis();
-            //Console.WriteLine(das);
+			//if (dsad.GetType() == typeof(MyCode[]))
+			//{
 
-        }
+			//}
+			//if (dsad.GetType().BaseType == typeof(Array)) { 
+			//    Console.WriteLine($"MainTest.RunThis, --------dsad type=true lgy");
+			//    int counter = 0;
+			//    foreach(var i in dsad)
+			//    {
+			//        Console.WriteLine(counter++); 
+			//    } 
+			//}
+			//else
+			//{
+
+			//    Console.WriteLine($"MainTest.RunThis, --------dsad type=false lgy");
+			//}
+
+
+
+
+
+			//UnitTest1 unitTest1 = new UnitTest1();
+
+			//unitTest1.TestMethod1();
+			//unitTest1.TestMethod2();
+			//unitTest1.TestMethod3();
+			//unitTest1.TestMethod4();
+
+
+			// 测试命名空间继承关系
+			//TestExtensionMethods testExtensionMethods = new TestExtensionMethods();
+			//string das = testExtensionMethods.GetName();
+			//testExtensionMethods.RunThis();
+			//Console.WriteLine(das);
+
+		}
     }
     public class MyCode {
 
@@ -591,7 +623,6 @@ namespace LearnCSharp
     }
 
 
-
     public class MyCodeChild : MyCode
     {
 
@@ -606,6 +637,45 @@ namespace LearnCSharp
 
 
     }
+
+
+	public interface IGetTheName {
+
+		public string ReWrite_Get();  
+
+		public string Cover_Get();
+
+	}
+
+
+	public class GetTheName : IGetTheName
+	{
+		public virtual string ReWrite_Get()   // 实现重写的虚方法
+		{
+			return "GetTheName.ReWrite_Get, 父类, ";
+		}
+
+		public string Cover_Get()        // 实现覆盖实方法
+		{
+			return "GetTheName.Cover_Get, 父类, ";
+		}
+	}
+
+	public class Rewrite : GetTheName   // 继承父类的重写子类
+	{
+		public override string ReWrite_Get()
+		{
+			return "Rewrite.ReWrite_Get, 父类被改变, ";
+		}
+	}
+
+	public class Cover : GetTheName  // 继承父类的覆盖子类
+	{
+		public new string Cover_Get()
+		{
+			return "Cover.GetTheName,父类被改变, ";
+		}
+	}
 
 
 
