@@ -15,6 +15,9 @@ namespace CSSharpTools
 			//Console.WriteLine(Factorial(3));
 
 
+			//UnitySceneUImageFixer.FixUnityScene();
+			UnitySceneParser.FixUnityScene();
+
 			//LogModule.Instance.Init( LogController.OutputToFile + LogController.LogWithStrConnect);
 
 			//FileTool.modifyFileContent();
@@ -22,7 +25,7 @@ namespace CSSharpTools
 			//FileTool.DeleteTheFileBySuffix();
 			//FileTool.GetFileEncodingByPath();
 
-			FileTool.copyFilesToTargetFloder("D:/lins.log", "D:/_YZ1_Publish_Game64/Bin/Client/Game/", "D:/YZ1_Dev_2022/Game_64/Bin/Client/Game/");
+			//FileTool.copyFilesToTargetFloder("D:/lins.log", "D:/_YZ1_Publish_Game64/Bin/Client/Game/", "D:/YZ1_Dev_2022/Game_64/Bin/Client/Game/");
 
 			//Stack<int> sta = new Stack<int>();
 			//sta.Push(0);
